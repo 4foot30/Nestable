@@ -31,6 +31,23 @@
         eEnd    = hasTouch ? 'touchend'    : 'mouseup';
         eCancel = hasTouch ? 'touchcancel' : 'mouseup';
 
+    var editableItemHTML = '';
+        editableItemHTML += '<li class="dd-item dd3-item" data-id="">';
+        editableItemHTML +=     '<div class="dd-handle dd3-handle">';
+        editableItemHTML +=         '<span class="glyphicon glyphicon-move" aria-hidden="true"></span>';
+        editableItemHTML +=     '</div>';
+        editableItemHTML +=     '<div class="dd3-content">';
+        editableItemHTML +=         '<div class="form-group">';
+        editableItemHTML +=             '<input class="form-control input-sm" type="text" placeholder="Enter title">';
+        editableItemHTML +=         '</div>';
+        // Note spaces, to retain whitespace gaps for inline-block buttons
+        editableItemHTML +=         ' <button type="text" class="btn btn-sm btn-info" data-action="add"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>';
+        editableItemHTML +=         ' <button type="text" class="btn btn-sm btn-danger" data-action="remove"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>';
+        editableItemHTML +=     '</div>';
+        editableItemHTML += '</li>';
+
+    var editableListHTML = '<ol class="dd-list">' + editableItemHTML + '';
+
     var defaults = {
             listNodeName    : 'ol',
             itemNodeName    : 'li',
@@ -81,6 +98,12 @@
                 var target = $(e.currentTarget),
                     action = target.data('action'),
                     item   = target.parent(list.options.itemNodeName);
+                if (action === 'add') {
+                    list.addItem(target);
+                }
+                if (action === 'remove') {
+                    list.removeItem(target);
+                }
                 if (action === 'collapse') {
                     list.collapseItem(item);
                 }
@@ -191,6 +214,21 @@
             this.dragDepth  = 0;
             this.hasNewRoot = false;
             this.pointEl    = null;
+        },
+
+        addItem: function(e)
+        {
+            // xxx
+            // editableItemHTML
+            var list = this,
+                item = e.parent().parent(this.options.itemNodeName);
+
+            item.append(editableItemHTML);
+        },
+
+        removeItem: function(e)
+        {
+            var list = this;
         },
 
         expandItem: function(li)
