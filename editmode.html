@@ -12,8 +12,6 @@
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
         <!-- Bootstrap - latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-        <!-- Bootstrap - optional theme -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
         <!-- Nestable -->
         <link href="jquery.nestable.css" rel="stylesheet">
         <!-- Test CSS -->
@@ -34,12 +32,16 @@
 
                     <div class="dd" id="nestable_list_1">
                         <ol class="dd-list">
-                            <li class="dd-item dd3-item" data-id="13">
-                                <div class="dd-handle dd3-handle">Drag</div>
+                            <li class="dd-item dd3-item">
+                                <div class="dd-handle dd3-handle">
+                                    <span class="glyphicon glyphicon-move" aria-hidden="true"></span>
+                                </div>
                                 <div class="dd3-content">
                                     <div class="form-group">
                                         <input class="form-control input-sm" type="text" placeholder="Enter title">
                                     </div>
+                                    <button type="text" class="btn btn-sm btn-info"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                                    <button type="text" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
                                 </div>
                             </li>
                         </ol>

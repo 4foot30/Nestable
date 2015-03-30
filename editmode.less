@@ -1,0 +1,35 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.dd3-item {
+    // Disable expanding/collapsing
+    [data-action="collapse"], [data-action="expand"] {
+        display: none;
+    }
+}
+
+.dd3-content {
+    height: 42px;
+    .form-group {
+        display: inline-block;
+        min-width: ~"calc(100% - 75px)";
+    }
+}
+
+.dd3-handle {
+    height: 42px;
+    padding: 0px;
+    cursor: move;
+    &:before {
+        display: none;
+    }
+    .glyphicon {
+          position: absolute;
+          color: #fff;
+          text-indent: 0%;
+          font-size: 22px;
+          top: 8px;
+          left: 3px;
+    }
+}
