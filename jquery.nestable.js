@@ -73,6 +73,7 @@
         this.w  = $(window);
         this.el = $(element);
         this.options = $.extend({}, defaults, options);
+        this.newItemCount = 1;
         this.init();
     }
 
@@ -257,16 +258,19 @@
             if (item.find(this.options.listNodeName).length === 0) {
                 // New list
                 // However, this must respect the maxDepth option
-                // If you're not at the maxDepth, you add a new list
-                // But if you are, you add a new item right after the item you clicked
                 if (item.parents(this.options.listNodeName).length < this.options.maxDepth) {
+                    // If you're not at the maxDepth, you add a new list
                     item.append(editableListHTML);
+                    list.setLocalID(item.find(this.options.listNodeName).first().find(this.options.itemNodeName).first());
                 } else {
-                    item.parent().prepend(editableItemHTML)
+                    // But if you are, you add a new item right above the item you clicked
+                    item.parent().prepend(editableItemHTML);
+                    list.setLocalID(item.parent().find(this.options.itemNodeName).first());
                 }
             } else {
                 // New item
                 item.find(this.options.listNodeName).first().prepend(editableItemHTML);
+                list.setLocalID(item.find(this.options.listNodeName).first().find(this.options.itemNodeName).first());
             }
 
             // You've added a new item, so the easiest way to enable it is to
@@ -277,9 +281,21 @@
 
         },
 
+        setLocalID: function(newItem)
+        {
+            // Increment count of new items as use this count as the new item's local ID
+            this.newItemCount++;
+            newItem.attr('data-id', this.newItemCount);
+            // If you want to easily see the ID of the new item:
+            //newItem.find('input').val(this.newItemCount);
+        },
+
         removeItem: function(e)
         {
             var list = this;
+            if (confirm("asdasdasd")) {
+
+            }
         },
 
         expandItem: function(li)
