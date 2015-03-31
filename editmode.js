@@ -2,7 +2,8 @@
 {
 
     $('.dd').nestable({
-        maxDepth: 3
+        maxDepth: 3,
+        editMode: true
     });
 
 })();

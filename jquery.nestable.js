@@ -32,7 +32,7 @@
         eCancel = hasTouch ? 'touchcancel' : 'mouseup';
 
     var editableItemHTML = '';
-        editableItemHTML += '<li class="dd-item dd3-item" data-id="">';
+        editableItemHTML += '<li class="dd-item dd3-item" data-id="" data-server-id="">';
         editableItemHTML +=     '<div class="dd-handle dd3-handle">';
         editableItemHTML +=         '<span class="glyphicon glyphicon-move" aria-hidden="true"></span>';
         editableItemHTML +=     '</div>';
@@ -64,7 +64,8 @@
             collapseBtnHTML : '<button data-action="collapse" type="button">Collapse</button>',
             group           : 0,
             maxDepth        : 5,
-            threshold       : 20
+            threshold       : 20,
+            editMode        : false
         };
 
     function Plugin(element, options)
@@ -155,6 +156,36 @@
                 list.w.on(eEnd, onEndEvent);
             }
 
+            var destroyNestable = function()
+            {
+
+                $(list.options.expandBtnHTML).remove();
+                $(list.options.collapseBtnHTML).remove();
+
+                if (hasTouch) {
+                    list.el[0].removeEventListener(eStart, onStartEvent, false);
+                    window.removeEventListener(eMove, onMoveEvent, false);
+                    window.removeEventListener(eEnd, onEndEvent, false);
+                    window.removeEventListener(eCancel, onEndEvent, false);
+                } else {
+                    list.el.off(eStart, onStartEvent);
+                    list.w.off(eMove, onMoveEvent);
+                    list.w.off(eEnd, onEndEvent);
+                }
+
+                list.el.off('click');
+                list.el.unbind('destroy-nestable');
+
+                list.el.data("nestable", null);
+            };
+
+            list.el.bind('destroy-nestable', destroyNestable);
+
+        },
+
+        destroy: function ()
+        {
+            this.el.trigger('destroy-nestable');
         },
 
         serialize: function()
@@ -238,6 +269,12 @@
                 item.find(this.options.listNodeName).first().prepend(editableItemHTML);
             }
 
+            // You've added a new item, so the easiest way to enable it is to
+            // remove all listeners etc....
+            this.destroy();
+            // ...and then re-create the list
+            this.init()
+
         },
 
         removeItem: function(e)
@@ -282,11 +319,14 @@
 
         setParent: function(li)
         {
-            if (li.children(this.options.listNodeName).length) {
-                li.prepend($(this.options.expandBtnHTML));
-                li.prepend($(this.options.collapseBtnHTML));
+            // Add expand/collapse controls, unless you're in Edit mode
+            if (!this.options.editMode) {
+                if (li.children(this.options.listNodeName).length) {
+                    li.prepend($(this.options.expandBtnHTML));
+                    li.prepend($(this.options.collapseBtnHTML));
+                }
+                li.children('[data-action="expand"]').hide();
             }
-            li.children('[data-action="expand"]').hide();
         },
 
         unsetParent: function(li)
