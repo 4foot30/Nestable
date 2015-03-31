@@ -283,7 +283,7 @@
             this.newItemCount++;
             newItem.attr('data-id', this.newItemCount);
             // If you want to easily see the ID of the new item:
-            newItem.find('input').val(this.newItemCount);
+            //newItem.find('input').val(this.newItemCount);
         },
 
         removeItem: function(e)

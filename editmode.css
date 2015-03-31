@@ -1,16 +1,13 @@
 body {
   font-family: 'Open Sans', sans-serif;
 }
-.dd3-item [data-action="collapse"],
-.dd3-item [data-action="expand"] {
-  display: none;
-}
 .dd3-content {
   height: 42px;
 }
 .dd3-content .form-group {
   display: inline-block;
   min-width: calc(100% - 75px);
+  margin-left: -4px;
   vertical-align: top;
 }
 .dd3-handle {
