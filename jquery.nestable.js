@@ -278,7 +278,6 @@
             this.destroy();
             // ...and then re-create the list
             this.init()
-
         },
 
         setLocalID: function(newItem)
@@ -292,9 +291,29 @@
 
         removeItem: function(e)
         {
-            var list = this;
-            if (confirm("asdasdasd")) {
+            var list = this,
+                item = e.closest(this.options.itemNodeName);
 
+            if (item.find(this.options.listNodeName).length > 0) {
+                if (confirm ('Are you sure you want to delete this item? This will also delete all children of this item.')) {
+                    item.remove();
+                }
+            } else {
+                item.remove();
+            }
+
+            // Since you're only removing items, you might be left with empty
+            // item containers - remove these
+            $(this.options.listNodeName).each(function() {
+                if ($(this).text() == "") {
+                    $(this).remove();
+                }
+            });
+
+            // If you've removed all items, recreate a new one automatically,
+            // so you can't be left with no controls
+            if (list.el.find(this.options.itemNodeName).length === 0) {
+                list.el.append(editableListHTML);
             }
         },
 
