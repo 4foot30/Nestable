@@ -273,11 +273,8 @@
                 list.setLocalID(item.find(this.options.listNodeName).first().find(this.options.itemNodeName).first());
             }
 
-            // You've added a new item, so the easiest way to enable it is to
-            // remove all listeners etc....
-            this.destroy();
-            // ...and then re-create the list
-            this.init()
+            // List has changed, update listeners
+            this.regenerate();
         },
 
         setLocalID: function(newItem)
@@ -304,8 +301,8 @@
 
             // Since you're only removing items, you might be left with empty
             // item containers - remove these
-            $(this.options.listNodeName).each(function() {
-                if ($(this).text() == "") {
+            list.el.find(this.options.listNodeName).each(function() {
+                if ($(this).children().length === 0) {
                     $(this).remove();
                 }
             });
@@ -315,6 +312,17 @@
             if (list.el.find(this.options.itemNodeName).length === 0) {
                 list.el.append(editableListHTML);
             }
+
+            // List has changed, update listeners
+            this.regenerate();
+        },
+
+        regenerate: function()
+        {
+            // You've added or removed an item, so remove all listeners etc....
+            this.destroy();
+            // ...and then re-create the list
+            this.init()
         },
 
         expandItem: function(li)
