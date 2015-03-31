@@ -11,6 +11,7 @@ body {
 .dd3-content .form-group {
   display: inline-block;
   min-width: calc(100% - 75px);
+  vertical-align: top;
 }
 .dd3-handle {
   height: 42px;

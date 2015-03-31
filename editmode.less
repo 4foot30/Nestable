@@ -14,6 +14,8 @@ body {
     .form-group {
         display: inline-block;
         min-width: ~"calc(100% - 75px)";
+        // Without this, Firefox displays the buttons well below the inout
+        vertical-align: top;
     }
 }
 
