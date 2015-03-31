@@ -218,12 +218,26 @@
 
         addItem: function(e)
         {
-            // xxx
-            // editableItemHTML
             var list = this,
                 item = e.parent().parent(this.options.itemNodeName);
 
-            item.append(editableItemHTML);
+            // Add new list if this item has no lists already
+            // Otherwise add a new item at the top of the first list you find
+            if (item.find(this.options.listNodeName).length === 0) {
+                // New list
+                // However, this must respect the maxDepth option
+                // If you're not at the maxDepth, you add a new list
+                // But if you are, you add a new item right after the item you clicked
+                if (item.parents(this.options.listNodeName).length < this.options.maxDepth) {
+                    item.append(editableListHTML);
+                } else {
+                    item.parent().prepend(editableItemHTML)
+                }
+            } else {
+                // New item
+                item.find(this.options.listNodeName).first().prepend(editableItemHTML);
+            }
+
         },
 
         removeItem: function(e)
