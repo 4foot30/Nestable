@@ -264,8 +264,8 @@
                     list.setLocalID(item.find(this.options.listNodeName).first().find(this.options.itemNodeName).first());
                 } else {
                     // But if you are, you add a new item right above the item you clicked
-                    item.parent().prepend(editableItemHTML);
-                    list.setLocalID(item.parent().find(this.options.itemNodeName).first());
+                    $(editableItemHTML).insertBefore(item);
+                    list.setLocalID(item.parent().find(this.options.itemNodeName).eq(item.index() - 1));
                 }
             } else {
                 // New item
@@ -287,7 +287,7 @@
             this.newItemCount++;
             newItem.attr('data-id', this.newItemCount);
             // If you want to easily see the ID of the new item:
-            //newItem.find('input').val(this.newItemCount);
+            newItem.find('input').val(this.newItemCount);
         },
 
         removeItem: function(e)
