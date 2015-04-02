@@ -263,8 +263,8 @@
                     item.append(editableListHTML);
                     list.setLocalID(item.find(this.options.listNodeName).first().find(this.options.itemNodeName).first());
                 } else {
-                    // But if you are, you add a new item right above the item you clicked
-                    $(editableItemHTML).insertBefore(item);
+                    // But if you are, you add a new item right below the item you clicked
+                    $(editableItemHTML).insertAfter(item);
                     list.setLocalID(item.parent().find(this.options.itemNodeName).eq(item.index() - 1));
                 }
             } else {
