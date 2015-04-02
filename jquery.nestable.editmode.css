@@ -2,7 +2,7 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 .dd {
-  min-width: 0;
+  max-width: none;
 }
 .dd3-content {
   height: 42px;
