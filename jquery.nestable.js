@@ -91,11 +91,17 @@
 
             list.placeEl = $('<div class="' + list.options.placeClass + '"/>');
 
-            // If you're in edit mode, change the name of the event that looks
-            // for a change in the list from "change" to "rearrange" so that
-            // it won't fire when the contents of an input field change
+            // If you're in edit mode:
             if (list.options.editMode) {
+                // Change the name of the event that looks for a change in the
+                // list from "change" to "rearrange" so that it won't fire when
+                // the contents of an input field change
                 list.options.changeEvent = 'rearrange';
+                // Add keyup event to all input fields so that when their values
+                // change, the list is regenerated
+                list.el.find('input').on('keyup', function(e) {
+                    list.el.trigger(list.options.changeEvent);
+                });
             }
 
             $.each(this.el.find(list.options.itemNodeName), function(k, el) {
@@ -187,6 +193,12 @@
                 list.el.unbind('destroy-nestable');
 
                 list.el.data("nestable", null);
+
+                if (list.options.editMode) {
+                    // If youre in edit mode, remove the keyup listeners that
+                    // monitor text changes
+                    list.el.find('input').off('keyup');
+                }
 
                 // If the list has a change handler attached, remove it
                 if (list.options.changeHandler) {
