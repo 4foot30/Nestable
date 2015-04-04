@@ -9,6 +9,6 @@
         maxDepth: 3,
         editMode: true,
         changeHandler: updateOutput
-    }).on('change', updateOutput);
+    }).on('rearrange', updateOutput);
 
 })();
