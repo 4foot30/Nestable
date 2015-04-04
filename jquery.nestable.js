@@ -65,7 +65,9 @@
             group           : 0,
             maxDepth        : 5,
             threshold       : 20,
-            editMode        : false
+            editMode        : false,
+            changeHandler   : null,
+            newItemCount    : 1
         };
 
     function Plugin(element, options)
@@ -73,7 +75,6 @@
         this.w  = $(window);
         this.el = $(element);
         this.options = $.extend({}, defaults, options);
-        this.newItemCount = 1;
         this.init();
     }
 
@@ -178,6 +179,11 @@
                 list.el.unbind('destroy-nestable');
 
                 list.el.data("nestable", null);
+
+                // If the list has a change handler attached, remove it
+                if (list.options.changeHandler) {
+                    list.el.off('change', list.options.changeHandler);
+                }
             };
 
             list.el.bind('destroy-nestable', destroyNestable);
@@ -280,10 +286,10 @@
         setLocalID: function(newItem)
         {
             // Increment count of new items as use this count as the new item's local ID
-            this.newItemCount++;
-            newItem.attr('data-id', this.newItemCount);
+            this.options.newItemCount++;
+            newItem.attr('data-id', this.options.newItemCount);
             // If you want to easily see the ID of the new item:
-            //newItem.find('input').val(this.newItemCount);
+            //newItem.find('input').val(this.options.newItemCount);
         },
 
         removeItem: function(e)
@@ -310,7 +316,9 @@
             // If you've removed all items, recreate a new one automatically,
             // so you can't be left with no controls
             if (list.el.find(this.options.itemNodeName).length === 0) {
-                list.el.append(editableListHTML);
+                item = list.el.append(editableListHTML);
+                // Give an ID to your new item
+                list.setLocalID(item.find(this.options.listNodeName).first().find(this.options.itemNodeName).first());
             }
 
             // List has changed, update listeners
@@ -322,7 +330,13 @@
             // You've added or removed an item, so remove all listeners etc....
             this.destroy();
             // ...and then re-create the list
-            this.init()
+            this.el.nestable(this.options);
+            // If the list needs a change handler, re-attach it
+            if (this.options.changeHandler) {
+                this.el.on('change', this.options.changeHandler);
+                // Trigger it
+                this.el.trigger('change');
+            }
         },
 
         expandItem: function(li)
