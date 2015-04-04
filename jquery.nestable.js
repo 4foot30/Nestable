@@ -229,6 +229,11 @@
                         var li   = $(this),
                             item = $.extend({}, li.data()),
                             sub  = li.children(list.options.listNodeName);
+                            // If you're in edit mode:
+                            if (list.options.editMode) {
+                                // Add the item's title into the serialised array
+                                item = $.extend(item, {'title': li.find('input').val()});
+                            }
                         if (sub.length) {
                             item.children = step(sub, depth + 1);
                         }
