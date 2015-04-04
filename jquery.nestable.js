@@ -67,6 +67,7 @@
             threshold       : 20,
             editMode        : false,
             changeHandler   : null,
+            changeEvent     : 'change',
             newItemCount    : 1
         };
 
@@ -89,6 +90,13 @@
             list.el.data('nestable-group', this.options.group);
 
             list.placeEl = $('<div class="' + list.options.placeClass + '"/>');
+
+            // If you're in edit mode, change the name of the event that looks
+            // for a change in the list from "change" to "rearrange" so that
+            // it won't fire when the contents of an input field change
+            if (list.options.editMode) {
+                list.options.changeEvent = 'rearrange';
+            }
 
             $.each(this.el.find(list.options.itemNodeName), function(k, el) {
                 list.setParent($(el));
@@ -182,7 +190,7 @@
 
                 // If the list has a change handler attached, remove it
                 if (list.options.changeHandler) {
-                    list.el.off('change', list.options.changeHandler);
+                    list.el.off(list.options.changeEvent, list.options.changeHandler);
                 }
             };
 
@@ -271,7 +279,7 @@
                 } else {
                     // But if you are, you add a new item right below the item you clicked
                     $(editableItemHTML).insertAfter(item);
-                    list.setLocalID(item.parent().find(this.options.itemNodeName).eq(item.index() - 1));
+                    list.setLocalID(item.parent().find(this.options.itemNodeName).eq(item.index() + 1));
                 }
             } else {
                 // New item
@@ -333,9 +341,9 @@
             this.el.nestable(this.options);
             // If the list needs a change handler, re-attach it
             if (this.options.changeHandler) {
-                this.el.on('change', this.options.changeHandler);
+                this.el.on(this.options.changeEvent, this.options.changeHandler);
                 // Trigger it
-                this.el.trigger('change');
+                this.el.trigger(this.options.changeEvent);
             }
         },
 
@@ -442,9 +450,9 @@
             this.placeEl.replaceWith(el);
 
             this.dragEl.remove();
-            this.el.trigger('change');
+            this.el.trigger(this.options.changeEvent);
             if (this.hasNewRoot) {
-                this.dragRootEl.trigger('change');
+                this.dragRootEl.trigger(this.options.changeEvent);
             }
             this.reset();
         },
