@@ -32,7 +32,7 @@
         eCancel = hasTouch ? 'touchcancel' : 'mouseup';
 
     var editableItemHTML = '';
-        editableItemHTML += '<li class="dd-item dd3-item" data-id="" data-server-id="">';
+        editableItemHTML += '<li class="dd-item dd3-item" data-sort-id="" data-server-id="">';
         editableItemHTML +=     '<div class="dd-handle dd3-handle">';
         editableItemHTML +=         '<span class="glyphicon glyphicon-move" aria-hidden="true"></span>';
         editableItemHTML +=     '</div>';
@@ -315,7 +315,7 @@
         {
             // Increment count of new items as use this count as the new item's local ID
             this.options.newItemCount++;
-            newItem.attr('data-id', this.options.newItemCount);
+            newItem.attr('data-sort-id', this.options.newItemCount);
             // If you want to easily see the ID of the new item:
             //newItem.find('input').val(this.options.newItemCount);
         },
