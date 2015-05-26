@@ -316,8 +316,13 @@
             // Increment count of new items as use this count as the new item's local ID
             this.options.newItemCount++;
             newItem.attr('data-sort-id', this.options.newItemCount);
+
             // If you want to easily see the ID of the new item:
             //newItem.find('input').val(this.options.newItemCount);
+            //
+            // If you want to give a server ID to new items, for testing:
+            newItem.attr('data-server-id', this.options.newItemCount);
+
         },
 
         removeItem: function(e)
