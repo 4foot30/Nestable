@@ -49,26 +49,29 @@
     var editableListHTML = '<ol class="dd-list">' + editableItemHTML + '';
 
     var defaults = {
-            listNodeName    : 'ol',
-            itemNodeName    : 'li',
-            rootClass       : 'dd',
-            listClass       : 'dd-list',
-            itemClass       : 'dd-item',
-            dragClass       : 'dd-dragel',
-            handleClass     : 'dd-handle',
-            collapsedClass  : 'dd-collapsed',
-            placeClass      : 'dd-placeholder',
-            noDragClass     : 'dd-nodrag',
-            emptyClass      : 'dd-empty',
-            expandBtnHTML   : '<button data-action="expand" type="button">Expand</button>',
-            collapseBtnHTML : '<button data-action="collapse" type="button">Collapse</button>',
-            group           : 0,
-            maxDepth        : 5,
-            threshold       : 20,
-            editMode        : false,
-            changeHandler   : null,
-            changeEvent     : 'change',
-            newItemCount    : 1
+            listNodeName            : 'ol',
+            itemNodeName            : 'li',
+            rootClass               : 'dd',
+            listClass               : 'dd-list',
+            itemClass               : 'dd-item',
+            dragClass               : 'dd-dragel',
+            handleClass             : 'dd-handle',
+            collapsedClass          : 'dd-collapsed',
+            placeClass              : 'dd-placeholder',
+            noDragClass             : 'dd-nodrag',
+            emptyClass              : 'dd-empty',
+            expandBtnHTML           : '<button data-action="expand" type="button">Expand</button>',
+            collapseBtnHTML         : '<button data-action="collapse" type="button">Collapse</button>',
+            group                   : 0,
+            maxDepth                : 5,
+            threshold               : 20,
+            editMode                : false,
+            changeHandler           : null,
+            changeEvent             : 'change',
+            newItemCount            : 1,
+            deletionTracking        : false,
+            deletionMessage         : 'Are you sure you want to delete this item?',
+            deletionMessageChildren : 'Are you sure you want to delete this item? This will also delete all children of this item.'
         };
 
     function Plugin(element, options)
@@ -323,11 +326,13 @@
                 item = e.closest(this.options.itemNodeName);
 
             if (item.find(this.options.listNodeName).length > 0) {
-                if (confirm ('Are you sure you want to delete this item? This will also delete all children of this item.')) {
+                if (confirm (this.options.deletionMessageChildren)) {
                     item.remove();
                 }
             } else {
-                item.remove();
+                if (confirm (this.options.deletionMessage)) {
+                    item.remove();
+                }
             }
 
             // Since you're only removing items, you might be left with empty

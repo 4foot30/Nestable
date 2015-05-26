@@ -8,7 +8,8 @@
     $('.dd').nestable({
         maxDepth: 3,
         editMode: true,
-        changeHandler: updateOutput
+        changeHandler: updateOutput,
+        deletionTracking: true
     }).on('rearrange', updateOutput);
 
 })();
