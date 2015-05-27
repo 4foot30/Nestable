@@ -247,7 +247,7 @@
                 };
             data = step(list.el.find(list.options.listNodeName).first(), depth);
             // If you're tracking deleted items:
-            if (list.options.deletionTracking) {
+            if (list.options.deletionTracking && list.options.deletedItems.length > 0) {
                 data.push(list.options.deletedItems);
             }
             return data;
@@ -325,8 +325,8 @@
             // If you want to easily see the ID of the new item:
             //newItem.find('input').val(this.options.newItemCount);
 
-            // If you want to give a server ID to new items, for testing:
-            newItem.attr('data-server-id', this.options.newItemCount);
+            // If you want to give a "fake" server ID to new items, for testing:
+            //newItem.attr('data-server-id', this.options.newItemCount);
 
         },
 
@@ -381,7 +381,10 @@
             } else if (typeof(e) === 'object') {
                 // Item with children was deleted
                 e.each(function() {
-                    list.options.deletedItems.push($(this).data('server-id'));
+                    var objectID = $(this).data('server-id');
+                    if (typeof(objectID) !== 'string') {
+                        list.options.deletedItems.push(objectID);
+                    }
                 });
             }
         },
