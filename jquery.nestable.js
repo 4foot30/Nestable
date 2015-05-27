@@ -70,6 +70,7 @@
             changeEvent             : 'change',
             newItemCount            : 1,
             deletionTracking        : false,
+            deletedItems            : [],
             deletionMessage         : 'Are you sure you want to delete this item?',
             deletionMessageChildren : 'Are you sure you want to delete this item? This will also delete all children of this item.'
         };
@@ -245,6 +246,10 @@
                     return array;
                 };
             data = step(list.el.find(list.options.listNodeName).first(), depth);
+            // If you're tracking deleted items:
+            if (list.options.deletionTracking) {
+                data.push(list.options.deletedItems);
+            }
             return data;
         },
 
@@ -319,7 +324,7 @@
 
             // If you want to easily see the ID of the new item:
             //newItem.find('input').val(this.options.newItemCount);
-            //
+
             // If you want to give a server ID to new items, for testing:
             newItem.attr('data-server-id', this.options.newItemCount);
 
@@ -331,11 +336,19 @@
                 item = e.closest(this.options.itemNodeName);
 
             if (item.find(this.options.listNodeName).length > 0) {
+                // Item has children
                 if (confirm (this.options.deletionMessageChildren)) {
+                    if (list.options.deletionTracking) {
+                        this.trackDeletion(item.parent().find('[data-server-id]'));
+                    }
                     item.remove();
                 }
             } else {
+                // Item has no children
                 if (confirm (this.options.deletionMessage)) {
+                    if (list.options.deletionTracking) {
+                        this.trackDeletion(item.data('server-id'));
+                    }
                     item.remove();
                 }
             }
@@ -358,6 +371,19 @@
 
             // List has changed, update listeners
             this.regenerate();
+        },
+
+        trackDeletion: function(e) {
+            var list = this;
+            if (typeof(e) === 'number') {
+                // Single item was deleted
+                list.options.deletedItems.push(e);
+            } else if (typeof(e) === 'object') {
+                // Item with children was deleted
+                e.each(function() {
+                    list.options.deletedItems.push($(this).data('server-id'));
+                });
+            }
         },
 
         regenerate: function()

@@ -2,7 +2,10 @@
 {
 
     var updateOutput = function(e) {
-        $('#json').val(window.JSON.stringify($(e.target).nestable('serialize')));
+        var output = $(e.target).nestable('serialize'),
+            string = window.JSON.stringify($(e.target).nestable('serialize')),
+            deletedItems = output[1];
+        $('#json').val(string);
     }
 
     $('.dd').nestable({
