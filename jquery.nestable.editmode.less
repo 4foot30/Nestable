@@ -3,7 +3,7 @@ body {
 }
 
 .dd {
-  max-width: none;
+    max-width: none;
 }
 
 .dd3-content {
@@ -11,9 +11,15 @@ body {
     .form-group {
         display: inline-block;
         min-width: ~"calc(100% - 75px)";
-        margin-left: -4px;
+        margin-left: -5px;
         // Without this, Firefox displays the buttons well below the inout
         vertical-align: top;
+    }
+    @media only screen and (max-width: 480px) {
+        .btn-sm {
+            // Decrease padding to stop buttons wrapping
+            padding: 5px 9px;
+        }
     }
 }
 
