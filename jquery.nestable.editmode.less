@@ -16,9 +16,17 @@ body {
         vertical-align: top;
     }
     @media only screen and (max-width: 480px) {
+        height: auto;
+        padding-right: 5px;
+        padding-left: 35px;
+        text-align: right;
+        .form-group {
+            width: 100%;
+            margin: 0px;
+        }
         .btn-sm {
-            // Decrease padding to stop buttons wrapping
-            padding: 5px 9px;
+            margin-top: 5px;
+            min-width: 50px;
         }
     }
 }
@@ -30,12 +38,15 @@ body {
     &:before {
         display: none;
     }
+    @media only screen and (max-width: 480px) {
+        height: 76px;
+    }
     .glyphicon {
-          position: absolute;
-          color: #fff;
-          text-indent: 0%;
-          font-size: 22px;
-          top: 8px;
-          left: 3px;
+        position: absolute;
+        color: #fff;
+        text-indent: 0%;
+        font-size: 22px;
+        top: 8px;
+        left: 3px;
     }
 }

@@ -14,8 +14,19 @@ body {
   vertical-align: top;
 }
 @media only screen and (max-width: 480px) {
+  .dd3-content {
+    height: auto;
+    padding-right: 5px;
+    padding-left: 35px;
+    text-align: right;
+  }
+  .dd3-content .form-group {
+    width: 100%;
+    margin: 0px;
+  }
   .dd3-content .btn-sm {
-    padding: 5px 9px;
+    margin-top: 5px;
+    min-width: 50px;
   }
 }
 .dd3-handle {
@@ -25,6 +36,11 @@ body {
 }
 .dd3-handle:before {
   display: none;
+}
+@media only screen and (max-width: 480px) {
+  .dd3-handle {
+    height: 76px;
+  }
 }
 .dd3-handle .glyphicon {
   position: absolute;
