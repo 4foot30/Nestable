@@ -41,8 +41,8 @@
         editableItemHTML +=             '<input class="form-control input-sm" type="text" placeholder="Enter title">';
         editableItemHTML +=         '</div>';
         // Note spaces, to retain whitespace gaps for inline-block buttons
-        editableItemHTML +=         ' <button type="text" class="btn btn-sm btn-info" data-action="add"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>';
-        editableItemHTML +=         ' <button type="text" class="btn btn-sm btn-danger" data-action="remove"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>';
+        editableItemHTML +=         ' <button type="button" class="btn btn-sm btn-info" data-action="add"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>';
+        editableItemHTML +=         ' <button type="button" class="btn btn-sm btn-danger" data-action="remove"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>';
         editableItemHTML +=     '</div>';
         editableItemHTML += '</li>';
 
