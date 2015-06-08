@@ -409,6 +409,8 @@
             this.destroy();
             // ...and then re-create the list
             this.el.nestable(this.options);
+            // Restore visibility on any hidden expand buttons (hidden by setParent())
+            $('.collapsible.dd-collapsed').children('[data-action="expand"]').show();
             // If the list needs a change handler, re-attach it
             if (this.options.changeHandler) {
                 this.el.on(this.options.changeEvent, this.options.changeHandler);
