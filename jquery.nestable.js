@@ -60,8 +60,8 @@
             placeClass              : 'dd-placeholder',
             noDragClass             : 'dd-nodrag',
             emptyClass              : 'dd-empty',
-            expandBtnHTML           : '<button data-action="expand" type="button">Expand</button>',
-            collapseBtnHTML         : '<button data-action="collapse" type="button">Collapse</button>',
+            expandBtnHTML           : '<button data-action="expand" type="button"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></button>',
+            collapseBtnHTML         : '<button data-action="collapse" type="button"><span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></button>',
             group                   : 0,
             maxDepth                : 5,
             threshold               : 20,
@@ -199,7 +199,7 @@
                 list.el.data("nestable", null);
 
                 if (list.options.editMode) {
-                    // If youre in edit mode, remove the keyup listeners that
+                    // If you're in edit mode, remove the keyup listeners that
                     // monitor text changes
                     list.el.find('input').off('keyup');
                 }
@@ -333,21 +333,21 @@
         removeItem: function(e)
         {
             var list = this,
-                item = e.closest(this.options.itemNodeName);
+                item = e.closest(list.options.itemNodeName);
 
-            if (item.find(this.options.listNodeName).length > 0) {
+            if (item.find(list.options.listNodeName).length > 0) {
                 // Item has children
-                if (confirm (this.options.deletionMessageChildren)) {
+                if (confirm (list.options.deletionMessageChildren)) {
                     if (list.options.deletionTracking) {
-                        this.trackDeletion(item.parent().find('[data-server-id]'));
+                        list.trackDeletion(item.parent().find('[data-server-id]'));
                     }
                     item.remove();
                 }
             } else {
                 // Item has no children
-                if (confirm (this.options.deletionMessage)) {
+                if (confirm (list.options.deletionMessage)) {
                     if (list.options.deletionTracking) {
-                        this.trackDeletion(item.data('server-id'));
+                        list.trackDeletion(item.data('server-id'));
                     }
                     item.remove();
                 }
@@ -355,22 +355,36 @@
 
             // Since you're only removing items, you might be left with empty
             // item containers - remove these
-            list.el.find(this.options.listNodeName).each(function() {
+            list.el.find(list.options.listNodeName).each(function() {
                 if ($(this).children().length === 0) {
                     $(this).remove();
                 }
             });
 
+            // Remove the collapse button any items that no longer have children
+            list.el.find(list.options.listNodeName).each(function() {
+                var collapsibles = $(this).find('.collapsible');
+                if (collapsibles.length) {
+                    collapsibles.each(function() {
+                        if ($(this).find(list.options.itemNodeName).length === 0) {
+                            $(this).find('[data-action="expand"]').remove();
+                            $(this).find('[data-action="collapse"]').remove();
+                            $(this).removeClass('collapsible');
+                        }
+                    });
+                }
+            });
+
             // If you've removed all items, recreate a new one automatically,
             // so you can't be left with no controls
-            if (list.el.find(this.options.itemNodeName).length === 0) {
+            if (list.el.find(list.options.itemNodeName).length === 0) {
                 item = list.el.append(editableListHTML);
                 // Give an ID to your new item
-                list.setLocalID(item.find(this.options.listNodeName).first().find(this.options.itemNodeName).first());
+                list.setLocalID(item.find(list.options.listNodeName).first().find(list.options.itemNodeName).first());
             }
 
             // List has changed, update listeners
-            this.regenerate();
+            list.regenerate();
         },
 
         trackDeletion: function(e) {
@@ -440,14 +454,15 @@
 
         setParent: function(li)
         {
-            // Add expand/collapse controls, unless you're in Edit mode
-            if (!this.options.editMode) {
-                if (li.children(this.options.listNodeName).length) {
+            // Add expand/collapse controls
+            if (li.children(this.options.listNodeName).length) {
+                if (!li.hasClass('collapsible')) {
                     li.prepend($(this.options.expandBtnHTML));
                     li.prepend($(this.options.collapseBtnHTML));
+                    li.addClass('collapsible');
                 }
-                li.children('[data-action="expand"]').hide();
             }
+            li.children('[data-action="expand"]').hide();
         },
 
         unsetParent: function(li)
@@ -455,6 +470,7 @@
             li.removeClass(this.options.collapsedClass);
             li.children('[data-action]').remove();
             li.children(this.options.listNodeName).remove();
+            li.removeClass('collapsible');
         },
 
         dragStart: function(e)

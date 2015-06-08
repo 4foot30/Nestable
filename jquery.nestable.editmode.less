@@ -4,6 +4,7 @@ body {
 
 .dd {
     max-width: none;
+    margin-bottom: 100px;
 }
 
 .dd3-content {
@@ -29,6 +30,9 @@ body {
             min-width: 50px;
         }
     }
+    .collapsible > & {
+        padding-left: 70px;
+    }
 }
 
 .dd3-handle {
@@ -48,5 +52,33 @@ body {
         font-size: 22px;
         top: 8px;
         left: 3px;
+    }
+}
+
+.dd3-item {
+    & > button {
+        text-indent: 0;
+        width: 30px;
+        height: 42px;
+        border: 1px solid #ccc;
+        background: #d5d5d5;
+        color: #fff;
+        position: absolute;
+        top: 0;
+        margin: 0;
+        left: 30px;
+        &:before {
+            content: '';
+        }
+        &:hover, &:focus {
+            background: #404040;
+            border: 1px solid #404040;
+        }
+        &:focus {
+            outline: none;
+        }
+        @media only screen and (max-width: 480px) {
+            height: 76px;
+        }
     }
 }
