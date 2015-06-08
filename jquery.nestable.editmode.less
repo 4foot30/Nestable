@@ -31,7 +31,7 @@ body {
         }
     }
     .collapsible > & {
-        padding-left: 70px;
+        padding-left: 65px;
     }
 }
 
@@ -52,6 +52,10 @@ body {
         font-size: 22px;
         top: 8px;
         left: 3px;
+        @media only screen and (max-width: 480px) {
+            top: 50%;
+            margin-top: -11px;
+        }
     }
 }
 

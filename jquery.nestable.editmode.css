@@ -31,7 +31,7 @@ body {
   }
 }
 .collapsible > .dd3-content {
-  padding-left: 70px;
+  padding-left: 65px;
 }
 .dd3-handle {
   height: 42px;
@@ -53,6 +53,12 @@ body {
   font-size: 22px;
   top: 8px;
   left: 3px;
+}
+@media only screen and (max-width: 480px) {
+  .dd3-handle .glyphicon {
+    top: 50%;
+    margin-top: -11px;
+  }
 }
 .dd3-item > button {
   text-indent: 0;
