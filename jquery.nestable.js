@@ -425,6 +425,10 @@
             li.children('[data-action="expand"]').hide();
             li.children('[data-action="collapse"]').show();
             li.children(this.options.listNodeName).show();
+            // Re-enable Add button in expanded item
+            if (this.options.editMode) {
+                li.find('[data-action="add"]').first().removeAttr('disabled').removeClass('disabled');
+            }
         },
 
         collapseItem: function(li)
@@ -435,6 +439,10 @@
                 li.children('[data-action="collapse"]').hide();
                 li.children('[data-action="expand"]').show();
                 li.children(this.options.listNodeName).hide();
+                // Disable Add button in collapsed item
+                if (this.options.editMode) {
+                    li.find('[data-action="add"]').first().attr('disabled','disabled').addClass('disabled');
+                }
             }
         },
 
