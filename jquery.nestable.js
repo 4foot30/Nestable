@@ -425,9 +425,10 @@
             li.children('[data-action="expand"]').hide();
             li.children('[data-action="collapse"]').show();
             li.children(this.options.listNodeName).show();
-            // Re-enable Add button in expanded item
+            // Re-enable Add/Delete buttons in expanded item
             if (this.options.editMode) {
                 li.find('[data-action="add"]').first().removeAttr('disabled').removeClass('disabled');
+                li.find('[data-action="remove"]').first().removeAttr('disabled').removeClass('disabled');
             }
         },
 
@@ -439,9 +440,10 @@
                 li.children('[data-action="collapse"]').hide();
                 li.children('[data-action="expand"]').show();
                 li.children(this.options.listNodeName).hide();
-                // Disable Add button in collapsed item
+                // Disable Add/Delete buttons in collapsed item
                 if (this.options.editMode) {
                     li.find('[data-action="add"]').first().attr('disabled','disabled').addClass('disabled');
+                    li.find('[data-action="remove"]').first().attr('disabled','disabled').addClass('disabled');
                 }
             }
         },
