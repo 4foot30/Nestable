@@ -40,9 +40,8 @@
         editableItemHTML +=         '<div class="form-group">';
         editableItemHTML +=             '<input class="form-control input-sm" type="text" placeholder="Enter title">';
         editableItemHTML +=         '</div>';
-        // Note spaces, to retain whitespace gaps for inline-block buttons
-        editableItemHTML +=         ' <button type="button" class="btn btn-sm btn-info" data-action="add"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>';
-        editableItemHTML +=         ' <button type="button" class="btn btn-sm btn-danger" data-action="remove"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>';
+        editableItemHTML +=         '<button type="button" class="btn btn-sm btn-info" data-action="add"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>';
+        editableItemHTML +=         '<button type="button" class="btn btn-sm btn-danger" data-action="remove"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>';
         editableItemHTML +=         '<div class="clearfix"></div>';
         editableItemHTML +=     '</div>';
         editableItemHTML += '</li>';
