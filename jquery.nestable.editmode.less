@@ -92,6 +92,15 @@ button[data-action="collapse"], button[data-action="expand"] {
 button[data-action="add"], button[data-action="remove"] {
     float: left;
     margin-left: 6px;
+    @media only screen and (max-width: 480px) {
+        margin-left: 0px;
+    }
+}
+
+button[data-action="add"] {
+    @media only screen and (max-width: 480px) {
+        margin-right: 6px;
+    }
 }
 
 // Make it more obvious that a button in a collapsed section is disabled
