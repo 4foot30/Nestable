@@ -65,7 +65,8 @@ body {
     margin-top: -11px;
   }
 }
-.dd3-item > button {
+button[data-action="collapse"],
+button[data-action="expand"] {
   text-indent: 0;
   width: 30px;
   height: 42px;
@@ -77,19 +78,24 @@ body {
   margin: 0;
   left: 30px;
 }
-.dd3-item > button:before {
+button[data-action="collapse"]:before,
+button[data-action="expand"]:before {
   content: '';
 }
-.dd3-item > button:hover,
-.dd3-item > button:focus {
+button[data-action="collapse"]:hover,
+button[data-action="expand"]:hover,
+button[data-action="collapse"]:focus,
+button[data-action="expand"]:focus {
   background: #404040;
   border: 1px solid #404040;
 }
-.dd3-item > button:focus {
+button[data-action="collapse"]:focus,
+button[data-action="expand"]:focus {
   outline: none;
 }
 @media only screen and (max-width: 480px) {
-  .dd3-item > button {
+  button[data-action="collapse"],
+  button[data-action="expand"] {
     height: 76px;
   }
 }
