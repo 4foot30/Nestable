@@ -9,8 +9,9 @@ body {
 
 .dd3-content {
     height: 42px;
+    padding-right: 7px;
     .form-group {
-        display: inline-block;
+        float: left;
         min-width: ~"calc(100% - 75px)";
         margin-left: -5px;
         // Without this, Firefox displays the buttons well below the inout
@@ -86,6 +87,11 @@ button[data-action="collapse"], button[data-action="expand"] {
     @media only screen and (max-width: 480px) {
         height: 76px;
     }
+}
+
+button[data-action="add"], button[data-action="remove"] {
+    float: left;
+    margin-left: 6px;
 }
 
 // Make it more obvious that a button in a collapsed section is disabled

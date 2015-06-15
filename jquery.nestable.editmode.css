@@ -7,9 +7,10 @@ body {
 }
 .dd3-content {
   height: 42px;
+  padding-right: 7px;
 }
 .dd3-content .form-group {
-  display: inline-block;
+  float: left;
   min-width: calc(100% - 75px);
   margin-left: -5px;
   vertical-align: top;
@@ -98,6 +99,11 @@ button[data-action="expand"]:focus {
   button[data-action="expand"] {
     height: 76px;
   }
+}
+button[data-action="add"],
+button[data-action="remove"] {
+  float: left;
+  margin-left: 6px;
 }
 .btn.disabled,
 .btn[disabled],
