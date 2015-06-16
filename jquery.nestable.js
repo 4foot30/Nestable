@@ -68,11 +68,13 @@
             editMode                : false,
             changeHandler           : null,
             changeEvent             : 'change',
-            newItemCount            : 1,//
             deletionTracking        : false,
-            deletedItems            : [],//
             deletionMessage         : 'Are you sure you want to delete this item?',
-            deletionMessageChildren : 'Are you sure you want to delete this item? This will also delete all children of this item.'
+            deletionMessageChildren : 'Are you sure you want to delete this item? This will also delete all children of this item.',
+            persisted               : {
+                newItemCount        : 1,
+                deletedItems        : []
+            }
         };
 
     function Plugin(element, options)
@@ -247,8 +249,8 @@
                 };
             data = step(list.el.find(list.options.listNodeName).first(), depth);
             // If you're tracking deleted items:
-            if (list.options.deletionTracking && list.options.deletedItems.length > 0) {
-                data.push(list.options.deletedItems);
+            if (list.options.deletionTracking && list.options.persisted.deletedItems.length > 0) {
+                data.push(list.options.persisted.deletedItems);
             }
             return data;
         },
@@ -319,14 +321,14 @@
         setLocalID: function(newItem)
         {
             // Increment count of new items as use this count as the new item's local ID
-            this.options.newItemCount++;
-            newItem.attr('data-sort-id', this.options.newItemCount);
+            this.options.persisted.newItemCount++;
+            newItem.attr('data-sort-id', this.options.persisted.newItemCount);
 
             // If you want to easily see the ID of the new item:
-            //newItem.find('input').val(this.options.newItemCount);
+            newItem.find('input').val(this.options.persisted.newItemCount);
 
             // If you want to give a "fake" server ID to new items, for testing:
-            //newItem.attr('data-server-id', this.options.newItemCount);
+            newItem.attr('data-server-id', this.options.persisted.newItemCount);
 
         },
 
@@ -391,13 +393,13 @@
             var list = this;
             if (typeof(e) === 'number') {
                 // Single item was deleted
-                list.options.deletedItems.push(e);
+                list.options.persisted.deletedItems.push(e);
             } else if (typeof(e) === 'object') {
                 // Item with children was deleted
                 e.each(function() {
                     var objectID = $(this).data('server-id');
                     if (typeof(objectID) !== 'string') {
-                        list.options.deletedItems.push(objectID);
+                        list.options.persisted.deletedItems.push(objectID);
                     }
                 });
             }
