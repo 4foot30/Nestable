@@ -313,7 +313,7 @@
             }
 
             // List has changed, update listeners
-            this.regenerate();
+            list.regenerate();
         },
 
         setLocalID: function(newItem)
