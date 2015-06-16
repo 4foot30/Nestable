@@ -68,9 +68,9 @@
             editMode                : false,
             changeHandler           : null,
             changeEvent             : 'change',
-            newItemCount            : 1,
+            newItemCount            : 1,//
             deletionTracking        : false,
-            deletedItems            : [],
+            deletedItems            : [],//
             deletionMessage         : 'Are you sure you want to delete this item?',
             deletionMessageChildren : 'Are you sure you want to delete this item? This will also delete all children of this item.'
         };
