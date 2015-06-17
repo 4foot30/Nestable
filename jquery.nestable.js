@@ -63,6 +63,7 @@
             expandBtnHTML           : '<button data-action="expand" type="button"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></button>',
             collapseBtnHTML         : '<button data-action="collapse" type="button"><span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></button>',
             animateToggle           : true,
+            animateToggleDuration   : 200,
             group                   : 0,
             maxDepth                : 5,
             threshold               : 20,
@@ -431,7 +432,7 @@
                 // Disable any buttons that could cause a toggle, while the toggle is running
                 $('[data-action="collapse"]').attr('disabled','disabled').addClass('disabled');
                 $('[data-action="expand"]').attr('disabled','disabled').addClass('disabled');
-                li.children(list.options.listNodeName).slideToggle(5000, function() {
+                li.children(list.options.listNodeName).slideToggle(list.options.animateToggleDuration, function() {
                     $('[data-action="collapse"]').removeAttr('disabled').removeClass('disabled');
                     $('[data-action="expand"]').removeAttr('disabled').removeClass('disabled');
                     expandCompleted(li);
@@ -461,7 +462,7 @@
                     // Disable any buttons that could cause a toggle, while the toggle is running
                     $('[data-action="collapse"]').attr('disabled','disabled').addClass('disabled');
                     $('[data-action="expand"]').attr('disabled','disabled').addClass('disabled');
-                    li.children(list.options.listNodeName).slideToggle(5000, function() {
+                    li.children(list.options.listNodeName).slideToggle(list.options.animateToggleDuration, function() {
                         $('[data-action="collapse"]').removeAttr('disabled').removeClass('disabled');
                         $('[data-action="expand"]').removeAttr('disabled').removeClass('disabled');
                         collapsedCompleted(li);
