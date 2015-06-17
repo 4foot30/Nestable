@@ -11,15 +11,21 @@ body {
 }
 .dd3-content {
   height: 42px;
-  padding-right: 7px;
+  padding-right: 1px;
   margin: 0px 0px 5px 0px;
+}
+.edit-mode .dd3-content {
+  padding-right: 7px;
 }
 .dd3-content .form-group {
   float: left;
-  min-width: calc(100% - 75px);
+  min-width: 100%;
   margin-left: -5px;
   margin-bottom: 0px;
   vertical-align: top;
+}
+.edit-mode .dd3-content .form-group {
+  min-width: calc(100% - 75px);
 }
 @media only screen and (max-width: 480px) {
   .dd3-content {
@@ -54,7 +60,7 @@ body {
   display: none;
 }
 @media only screen and (max-width: 480px) {
-  .dd3-handle {
+  .edit-mode .dd3-handle {
     height: 76px;
   }
 }
@@ -101,8 +107,8 @@ button[data-action="expand"]:focus {
   outline: none;
 }
 @media only screen and (max-width: 480px) {
-  button[data-action="collapse"],
-  button[data-action="expand"] {
+  .edit-mode button[data-action="collapse"],
+  .edit-mode button[data-action="expand"] {
     height: 76px;
   }
 }
@@ -110,6 +116,11 @@ button[data-action="add"],
 button[data-action="remove"] {
   float: left;
   margin-left: 6px;
+  display: none;
+}
+.edit-mode button[data-action="add"],
+.edit-mode button[data-action="remove"] {
+  display: block;
 }
 @media only screen and (max-width: 480px) {
   button[data-action="add"],

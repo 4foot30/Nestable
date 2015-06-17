@@ -15,11 +15,17 @@ body {
 
 .dd3-content {
     height: 42px;
-    padding-right: 7px;
+    padding-right: 1px;
+    .edit-mode & {
+        padding-right: 7px;
+    }
     margin: 0px 0px 5px 0px;
     .form-group {
         float: left;
-        min-width: ~"calc(100% - 75px)";
+        min-width: 100%;
+        .edit-mode & {
+            min-width: ~"calc(100% - 75px)";
+        }
         margin-left: -5px;
         margin-bottom: 0px;
         // Without this, Firefox displays the buttons well below the inout
@@ -55,7 +61,9 @@ body {
         display: none;
     }
     @media only screen and (max-width: 480px) {
-        height: 76px;
+        .edit-mode & {
+            height: 76px;
+        }
     }
     .glyphicon {
         position: absolute;
@@ -93,13 +101,20 @@ button[data-action="collapse"], button[data-action="expand"] {
         outline: none;
     }
     @media only screen and (max-width: 480px) {
-        height: 76px;
+        .edit-mode & {
+            height: 76px;
+        }
     }
 }
 
 button[data-action="add"], button[data-action="remove"] {
     float: left;
     margin-left: 6px;
+    // Hide, unless in edit mode
+    display: none;
+    .edit-mode & {
+        display: block;
+    }
     @media only screen and (max-width: 480px) {
         margin-left: 0px;
     }
