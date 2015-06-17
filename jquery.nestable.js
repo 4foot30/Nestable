@@ -109,6 +109,8 @@
                 list.el.find('input').on('keyup', function(e) {
                     list.el.trigger(list.options.changeEvent);
                 });
+                // Let the list know that it's in edit mode
+                list.el.addClass('edit-mode');
             }
 
             $.each(this.el.find(list.options.itemNodeName), function(k, el) {
