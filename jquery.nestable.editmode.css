@@ -83,8 +83,8 @@ button[data-action="expand"] {
   text-indent: 0;
   width: 30px;
   height: 42px;
-  border: 1px solid #ccc;
   background: #d5d5d5;
+  border: 1px solid #ccc;
   color: #fff;
   position: absolute;
   top: 0;
@@ -105,6 +105,17 @@ button[data-action="expand"]:focus {
 button[data-action="collapse"]:focus,
 button[data-action="expand"]:focus {
   outline: none;
+}
+button[data-action="collapse"].disabled:hover,
+button[data-action="expand"].disabled:hover,
+button[data-action="collapse"][disabled]:hover,
+button[data-action="expand"][disabled]:hover,
+button[data-action="collapse"].disabled:focus,
+button[data-action="expand"].disabled:focus,
+button[data-action="collapse"][disabled]:focus,
+button[data-action="expand"][disabled]:focus {
+  background: #d5d5d5;
+  border: 1px solid #ccc;
 }
 @media only screen and (max-width: 480px) {
   .edit-mode button[data-action="collapse"],
@@ -137,4 +148,9 @@ button[data-action="remove"] {
 .btn[disabled],
 fieldset[disabled] .btn {
   opacity: 0.3;
+  cursor: not-allowed;
+}
+button.disabled,
+button[disabled] {
+  cursor: not-allowed;
 }

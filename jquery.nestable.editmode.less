@@ -83,8 +83,8 @@ button[data-action="collapse"], button[data-action="expand"] {
     text-indent: 0;
     width: 30px;
     height: 42px;
-    border: 1px solid #ccc;
     background: #d5d5d5;
+    border: 1px solid #ccc;
     color: #fff;
     position: absolute;
     top: 0;
@@ -99,6 +99,12 @@ button[data-action="collapse"], button[data-action="expand"] {
     }
     &:focus {
         outline: none;
+    }
+    &.disabled, &[disabled] {
+        &:hover, &:focus {
+            background: #d5d5d5;
+            border: 1px solid #ccc;
+        }
     }
     @media only screen and (max-width: 480px) {
         .edit-mode & {
@@ -128,5 +134,9 @@ button[data-action="add"] {
 
 // Make it more obvious that a button in a collapsed section is disabled
 .btn.disabled, .btn[disabled], fieldset[disabled] .btn {
-      opacity: 0.3;
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+button.disabled, button[disabled] {
+    cursor: not-allowed;
 }

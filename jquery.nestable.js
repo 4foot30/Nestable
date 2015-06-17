@@ -428,7 +428,12 @@
         {
             var list = this;
             if (list.options.animateToggle) {
-                li.children(list.options.listNodeName).slideToggle(200, function() {
+                // Disable any buttons that could cause a toggle, while the toggle is running
+                $('[data-action="collapse"]').attr('disabled','disabled').addClass('disabled');
+                $('[data-action="expand"]').attr('disabled','disabled').addClass('disabled');
+                li.children(list.options.listNodeName).slideToggle(5000, function() {
+                    $('[data-action="collapse"]').removeAttr('disabled').removeClass('disabled');
+                    $('[data-action="expand"]').removeAttr('disabled').removeClass('disabled');
                     expandCompleted(li);
                 });
             } else {
@@ -453,7 +458,12 @@
                 lists = li.children(list.options.listNodeName);
             if (lists.length) {
                 if (list.options.animateToggle) {
-                    li.children(list.options.listNodeName).slideToggle(200, function() {
+                    // Disable any buttons that could cause a toggle, while the toggle is running
+                    $('[data-action="collapse"]').attr('disabled','disabled').addClass('disabled');
+                    $('[data-action="expand"]').attr('disabled','disabled').addClass('disabled');
+                    li.children(list.options.listNodeName).slideToggle(5000, function() {
+                        $('[data-action="collapse"]').removeAttr('disabled').removeClass('disabled');
+                        $('[data-action="expand"]').removeAttr('disabled').removeClass('disabled');
                         collapsedCompleted(li);
                     });
                 } else {
