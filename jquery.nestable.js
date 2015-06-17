@@ -31,6 +31,37 @@
         eEnd    = hasTouch ? 'touchend'    : 'mouseup';
         eCancel = hasTouch ? 'touchcancel' : 'mouseup';
 
+    var defaults = {
+        listNodeName            : 'ol',
+        itemNodeName            : 'li',
+        rootClass               : 'dd',
+        listClass               : 'dd-list',
+        itemClass               : 'dd-item',
+        dragClass               : 'dd-dragel',
+        handleClass             : 'dd-handle',
+        collapsedClass          : 'dd-collapsed',
+        placeClass              : 'dd-placeholder',
+        noDragClass             : 'dd-nodrag',
+        emptyClass              : 'dd-empty',
+        expandBtnHTML           : '<button data-action="expand" type="button"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></button>',
+        collapseBtnHTML         : '<button data-action="collapse" type="button"><span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></button>',
+        animateToggle           : true,
+        animateToggleDuration   : 200,
+        group                   : 0,
+        maxDepth                : 5,
+        threshold               : 20,
+        editMode                : false,
+        changeHandler           : null,
+        changeEvent             : 'change',
+        deletionTracking        : false,
+        deletionMessage         : 'Are you sure you want to delete this item?',
+        deletionMessageChildren : 'Are you sure you want to delete this item? This will also delete all children of this item.',
+        persisted               : {
+            newItemCount        : 1,
+            deletedItems        : []
+        }
+    };
+
     var editableItemHTML = '';
         editableItemHTML += '<li class="dd-item dd3-item" data-sort-id="" data-server-id="">';
         editableItemHTML +=     '<div class="dd-handle dd3-handle">';
@@ -46,38 +77,13 @@
         editableItemHTML +=     '</div>';
         editableItemHTML += '</li>';
 
-    var editableListHTML = '<ol class="dd-list">' + editableItemHTML + '';
-
-    var defaults = {
-            listNodeName            : 'ol',
-            itemNodeName            : 'li',
-            rootClass               : 'dd',
-            listClass               : 'dd-list',
-            itemClass               : 'dd-item',
-            dragClass               : 'dd-dragel',
-            handleClass             : 'dd-handle',
-            collapsedClass          : 'dd-collapsed',
-            placeClass              : 'dd-placeholder',
-            noDragClass             : 'dd-nodrag',
-            emptyClass              : 'dd-empty',
-            expandBtnHTML           : '<button data-action="expand" type="button"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></button>',
-            collapseBtnHTML         : '<button data-action="collapse" type="button"><span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></button>',
-            animateToggle           : true,
-            animateToggleDuration   : 200,
-            group                   : 0,
-            maxDepth                : 5,
-            threshold               : 20,
-            editMode                : false,
-            changeHandler           : null,
-            changeEvent             : 'change',
-            deletionTracking        : false,
-            deletionMessage         : 'Are you sure you want to delete this item?',
-            deletionMessageChildren : 'Are you sure you want to delete this item? This will also delete all children of this item.',
-            persisted               : {
-                newItemCount        : 1,
-                deletedItems        : []
-            }
-        };
+    var editableListHTML;
+    if (defaults.animateToggle) {
+        // Set inline display style on toggleable elements to avoid jQuery's slideToggle jumping/glitching
+        editableListHTML = '<ol class="dd-list" style="display:block;">' + editableItemHTML + '';
+    } else {
+        editableListHTML = '<ol class="dd-list">' + editableItemHTML + '';
+    }
 
     function Plugin(element, options)
     {
