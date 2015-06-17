@@ -5,14 +5,20 @@ body {
   max-width: none;
   margin-bottom: 100px;
 }
+.dd-list {
+  overflow: hidden;
+  width: 100%;
+}
 .dd3-content {
   height: 42px;
   padding-right: 7px;
+  margin: 0px 0px 5px 0px;
 }
 .dd3-content .form-group {
   float: left;
   min-width: calc(100% - 75px);
   margin-left: -5px;
+  margin-bottom: 0px;
   vertical-align: top;
 }
 @media only screen and (max-width: 480px) {

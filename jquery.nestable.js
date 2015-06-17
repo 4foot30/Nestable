@@ -62,6 +62,7 @@
             emptyClass              : 'dd-empty',
             expandBtnHTML           : '<button data-action="expand" type="button"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></button>',
             collapseBtnHTML         : '<button data-action="collapse" type="button"><span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></button>',
+            animateToggle           : true,
             group                   : 0,
             maxDepth                : 5,
             threshold               : 20,
@@ -423,29 +424,49 @@
 
         expandItem: function(li)
         {
-            li.removeClass(this.options.collapsedClass);
-            li.children('[data-action="expand"]').hide();
-            li.children('[data-action="collapse"]').show();
-            li.children(this.options.listNodeName).show();
+            var list = this;
+            if (list.options.animateToggle) {
+                li.children(list.options.listNodeName).slideToggle(200, function() {
+                    expandCompleted(li);
+                });
+            } else {
+                expandCompleted(li);
+                li.children(list.options.listNodeName).show();
+            }
             // Re-enable Add/Delete buttons in expanded item
-            if (this.options.editMode) {
+            if (list.options.editMode) {
                 li.find('[data-action="add"]').first().removeAttr('disabled').removeClass('disabled');
                 li.find('[data-action="remove"]').first().removeAttr('disabled').removeClass('disabled');
+            }
+            function expandCompleted(li) {
+                li.removeClass(list.options.collapsedClass);
+                li.children('[data-action="expand"]').hide();
+                li.children('[data-action="collapse"]').show();
             }
         },
 
         collapseItem: function(li)
         {
-            var lists = li.children(this.options.listNodeName);
+            var list = this,
+                lists = li.children(list.options.listNodeName);
             if (lists.length) {
-                li.addClass(this.options.collapsedClass);
-                li.children('[data-action="collapse"]').hide();
-                li.children('[data-action="expand"]').show();
-                li.children(this.options.listNodeName).hide();
+                if (list.options.animateToggle) {
+                    li.children(list.options.listNodeName).slideToggle(200, function() {
+                        collapsedCompleted(li);
+                    });
+                } else {
+                    collapsedCompleted(li);
+                    li.children(list.options.listNodeName).hide();
+                }
                 // Disable Add/Delete buttons in collapsed item
-                if (this.options.editMode) {
+                if (list.options.editMode) {
                     li.find('[data-action="add"]').first().attr('disabled','disabled').addClass('disabled');
                     li.find('[data-action="remove"]').first().attr('disabled','disabled').addClass('disabled');
+                }
+                function collapsedCompleted(li) {
+                    li.addClass(list.options.collapsedClass);
+                    li.children('[data-action="collapse"]').hide();
+                    li.children('[data-action="expand"]').show();
                 }
             }
         },
