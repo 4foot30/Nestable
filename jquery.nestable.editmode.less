@@ -7,6 +7,10 @@ body {
     margin-bottom: 100px;
 }
 
+.dd-dragel > .dd3-item > .dd3-content {
+    margin-bottom: 5px;
+}
+
 .dd-list {
     // Matches the styles applied inline by jQuery's slideToggle function
     overflow: hidden;
@@ -16,19 +20,19 @@ body {
 .dd3-content {
     height: 42px;
     padding-right: 1px;
-    .edit-mode & {
+    .edit-mode &, .dd-dragel & {
         padding-right: 7px;
     }
     margin: 0px 0px 5px 0px;
     .form-group {
         float: left;
         min-width: 100%;
-        .edit-mode & {
+        .edit-mode &, .dd-dragel & {
             min-width: ~"calc(100% - 75px)";
         }
         margin-left: -5px;
         margin-bottom: 0px;
-        // Without this, Firefox displays the buttons well below the inout
+        // Without this, Firefox displays the buttons well below the input
         vertical-align: top;
     }
     @media only screen and (max-width: 480px) {
@@ -61,7 +65,7 @@ body {
         display: none;
     }
     @media only screen and (max-width: 480px) {
-        .edit-mode & {
+        .edit-mode &, .dd-dragel & {
             height: 76px;
         }
     }
@@ -107,7 +111,7 @@ button[data-action="collapse"], button[data-action="expand"] {
         }
     }
     @media only screen and (max-width: 480px) {
-        .edit-mode & {
+        .edit-mode &, .dd-dragel & {
             height: 76px;
         }
     }
@@ -116,9 +120,9 @@ button[data-action="collapse"], button[data-action="expand"] {
 button[data-action="add"], button[data-action="remove"] {
     float: left;
     margin-left: 6px;
-    // Hide, unless in edit mode
+    // Hide, unless in edit mode or dragging
     display: none;
-    .edit-mode & {
+    .edit-mode &, .dd-dragel & {
         display: block;
     }
     @media only screen and (max-width: 480px) {

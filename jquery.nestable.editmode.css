@@ -5,6 +5,9 @@ body {
   max-width: none;
   margin-bottom: 100px;
 }
+.dd-dragel > .dd3-item > .dd3-content {
+  margin-bottom: 5px;
+}
 .dd-list {
   overflow: hidden;
   width: 100%;
@@ -14,7 +17,8 @@ body {
   padding-right: 1px;
   margin: 0px 0px 5px 0px;
 }
-.edit-mode .dd3-content {
+.edit-mode .dd3-content,
+.dd-dragel .dd3-content {
   padding-right: 7px;
 }
 .dd3-content .form-group {
@@ -24,7 +28,8 @@ body {
   margin-bottom: 0px;
   vertical-align: top;
 }
-.edit-mode .dd3-content .form-group {
+.edit-mode .dd3-content .form-group,
+.dd-dragel .dd3-content .form-group {
   min-width: calc(100% - 75px);
 }
 @media only screen and (max-width: 480px) {
@@ -60,7 +65,8 @@ body {
   display: none;
 }
 @media only screen and (max-width: 480px) {
-  .edit-mode .dd3-handle {
+  .edit-mode .dd3-handle,
+  .dd-dragel .dd3-handle {
     height: 76px;
   }
 }
@@ -119,7 +125,9 @@ button[data-action="expand"][disabled]:focus {
 }
 @media only screen and (max-width: 480px) {
   .edit-mode button[data-action="collapse"],
-  .edit-mode button[data-action="expand"] {
+  .edit-mode button[data-action="expand"],
+  .dd-dragel button[data-action="collapse"],
+  .dd-dragel button[data-action="expand"] {
     height: 76px;
   }
 }
@@ -130,7 +138,9 @@ button[data-action="remove"] {
   display: none;
 }
 .edit-mode button[data-action="add"],
-.edit-mode button[data-action="remove"] {
+.edit-mode button[data-action="remove"],
+.dd-dragel button[data-action="add"],
+.dd-dragel button[data-action="remove"] {
   display: block;
 }
 @media only screen and (max-width: 480px) {
