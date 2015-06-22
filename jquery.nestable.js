@@ -335,10 +335,10 @@
             newItem.attr('data-sort-id', this.options.persisted.newItemCount);
 
             // If you want to easily see the ID of the new item:
-            newItem.find('input').val(this.options.persisted.newItemCount);
+            //newItem.find('input').val(this.options.persisted.newItemCount);
 
             // If you want to give a "fake" server ID to new items, for testing:
-            newItem.attr('data-server-id', this.options.persisted.newItemCount);
+            //newItem.attr('data-server-id', this.options.persisted.newItemCount);
 
         },
 
