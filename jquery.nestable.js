@@ -65,8 +65,6 @@
         }
     };
 
-    defaults.topLevelItemButtonHTML = defaults.topLevelItemButtonHTML.replace('topLevelItemButtonText', defaults.topLevelItemButtonText);
-
     var editableItemHTML = '';
         editableItemHTML += '<li class="dd-item dd3-item" data-sort-id="" data-server-id="">';
         editableItemHTML +=     '<div class="dd-handle dd3-handle">';
@@ -128,6 +126,9 @@
             // If you need a button to add a new top-level item
             if (list.options.topLevelItemButton) {
                 if ($('[data-action="add-top-level"]').length === 0) {
+                    // Update the button's text
+                    list.options.topLevelItemButtonHTML = list.options.topLevelItemButtonHTML.replace('topLevelItemButtonText', list.options.topLevelItemButtonText);
+                    // Add the button
                     list.el.append($(list.options.topLevelItemButtonHTML));
                 }
             }
