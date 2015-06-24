@@ -164,3 +164,6 @@ button.disabled,
 button[disabled] {
   cursor: not-allowed;
 }
+button[data-action="add-top-level"] {
+  margin-top: 10px;
+}

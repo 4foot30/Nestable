@@ -56,11 +56,16 @@
         deletionTracking        : false,
         deletionMessage         : 'Are you sure you want to delete this item?',
         deletionMessageChildren : 'Are you sure you want to delete this item? This will also delete all children of this item.',
+        topLevelItemButton      : false,
+        topLevelItemButtonText  : 'Add a new top-level item',
+        topLevelItemButtonHTML  : '<button type="button" class="btn btn-info pull-right" data-action="add-top-level"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> topLevelItemButtonText</button><div class="clearfix"></div>',
         persisted               : {
             newItemCount        : 1,
             deletedItems        : []
         }
     };
+
+    defaults.topLevelItemButtonHTML = defaults.topLevelItemButtonHTML.replace('topLevelItemButtonText', defaults.topLevelItemButtonText);
 
     var editableItemHTML = '';
         editableItemHTML += '<li class="dd-item dd3-item" data-sort-id="" data-server-id="">';
@@ -120,6 +125,13 @@
                 list.el.addClass('edit-mode');
             }
 
+            // If you need a button to add a new top-level item
+            if (list.options.topLevelItemButton) {
+                if ($('[data-action="add-top-level"]').length === 0) {
+                    list.el.append($(list.options.topLevelItemButtonHTML));
+                }
+            }
+
             $.each(this.el.find(list.options.itemNodeName), function(k, el) {
                 list.setParent($(el));
             });
@@ -142,6 +154,9 @@
                 }
                 if (action === 'expand') {
                     list.expandItem(item);
+                }
+                if (action === 'add-top-level') {
+                    list.addItem(target, true);
                 }
             });
 
@@ -299,14 +314,19 @@
             this.pointEl    = null;
         },
 
-        addItem: function(e)
+        addItem: function(e, topLevel)
         {
             var list = this,
                 item = e.parent().parent(this.options.itemNodeName);
 
-            // Add new list if this item has no lists already
+            // If a top-level item has been asked for, add a new list item as the last child of the outermost list
+            // Or, add new list if the item you clicked has no lists already
             // Otherwise add a new item at the top of the first list you find
-            if (item.find(this.options.listNodeName).length === 0) {
+            if(topLevel) {
+                // Top-level item to be added
+                list.el.find(this.options.listNodeName).first().append(editableItemHTML);
+                list.setLocalID(list.el.find(this.options.itemNodeName).last());
+            } else if (item.find(this.options.listNodeName).length === 0) {
                 // New list
                 // However, this must respect the maxDepth option
                 if (item.parents(this.options.listNodeName).length < this.options.maxDepth) {

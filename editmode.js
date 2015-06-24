@@ -9,10 +9,11 @@
     }
 
     $('.dd').nestable({
-        maxDepth: 3,
         editMode: true,
         changeHandler: updateOutput,
-        deletionTracking: true
+        deletionTracking: true,
+        maxDepth: 3,
+        topLevelItemButton: true
     }).on('rearrange', updateOutput);
 
 })();
