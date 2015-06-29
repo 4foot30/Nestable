@@ -8,6 +8,14 @@ body {
 .dd-dragel > .dd3-item > .dd3-content {
   margin-bottom: 5px;
 }
+.dd-dragel .dd-handle {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.dd-dragel .dd3-content {
+  -webkit-box-shadow: 2px 4px 6px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 2px 4px 6px 0 rgba(0, 0, 0, 0.1);
+}
 .dd-list {
   overflow: hidden;
   width: 100%;
