@@ -333,14 +333,15 @@
             // If a top-level item has been asked for, add a new list item as the last child of the outermost list
             // Or, add new list if the item you clicked has no lists already
             // Otherwise add a new item at the top of the first list you find
+            var newItem;
             if(topLevel) {
                 // Top-level item to be added
                 if (list.options.topLevelItemButtonLocation === 'bottom') {
                     list.el.find(this.options.listNodeName).first().append(editableItemHTML);
-                    list.setLocalID(list.el.find(this.options.itemNodeName).last());
+                    newItem = list.el.find(this.options.itemNodeName).last();
                 } else {
                     list.el.find(this.options.listNodeName).first().prepend(editableItemHTML);
-                    list.setLocalID(list.el.find(this.options.itemNodeName).first());
+                    newItem = list.el.find(this.options.itemNodeName).first();
                 }
             } else if (item.find(this.options.listNodeName).length === 0) {
                 // New list
@@ -348,16 +349,22 @@
                 if (item.parents(this.options.listNodeName).length < this.options.maxDepth) {
                     // If you're not at the maxDepth, you add a new list
                     item.append(editableListHTML);
-                    list.setLocalID(item.find(this.options.listNodeName).first().find(this.options.itemNodeName).first());
+                    newItem = item.find(this.options.listNodeName).first().find(this.options.itemNodeName).first();
                 } else {
                     // But if you are, you add a new item right below the item you clicked
                     $(editableItemHTML).insertAfter(item);
-                    list.setLocalID(item.parent().find(this.options.itemNodeName).eq(item.index() + 1));
+                    newItem = item.parent().find(this.options.itemNodeName).eq(item.index() + 1);
                 }
             } else {
                 // New item
                 item.find(this.options.listNodeName).first().prepend(editableItemHTML);
-                list.setLocalID(item.find(this.options.listNodeName).first().find(this.options.itemNodeName).first());
+                newItem = item.find(this.options.listNodeName).first().find(this.options.itemNodeName).first();
+            }
+            list.setLocalID(newItem);
+
+            // Give focus to the input field in the new item, if on a large enough screen
+            if (window.innerWidth > 768) {
+                newItem.find('input').focus();
             }
 
             // List has changed, update listeners
