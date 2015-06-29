@@ -70,7 +70,8 @@ body {
     height: 76px;
   }
 }
-.dd3-handle .glyphicon {
+.dd3-handle .glyphicon,
+.dd3-handle .fa {
   position: absolute;
   color: #fff;
   text-indent: 0%;
@@ -79,7 +80,8 @@ body {
   left: 3px;
 }
 @media only screen and (max-width: 480px) {
-  .dd3-handle .glyphicon {
+  .dd3-handle .glyphicon,
+  .dd3-handle .fa {
     top: 50%;
     margin-top: -11px;
   }

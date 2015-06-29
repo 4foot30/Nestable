@@ -61,6 +61,7 @@
         topLevelItemButtonHTML      : '<button type="button" class="btn btn-info" data-action="add-top-level"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> topLevelItemButtonText</button><div class="clearfix"></div>',
         topLevelItemButtonLocation  : 'bottom',
         topLevelItemButtonAlignment : 'right',
+        iconLib                     : 'glyphicon',
         persisted                   : {
             newItemCount            : 1,
             deletedItems            : []
@@ -123,6 +124,15 @@
                 });
                 // Let the list know that it's in edit mode
                 list.el.addClass('edit-mode');
+            }
+
+            // If an icon type other than Glyphicon is needed, update the relevant HTML
+            if (list.options.iconLib === 'font-awesome') {
+                editableListHTML = editableListHTML.replace('glyphicon glyphicon-move', 'fa fa-arrows');
+                editableItemHTML = editableItemHTML.replace('glyphicon glyphicon-move', 'fa fa-arrows');
+                list.options.expandBtnHTML = list.options.expandBtnHTML.replace('glyphicon glyphicon-chevron-down', 'fa fa-chevron-down');
+                list.options.collapseBtnHTML = list.options.collapseBtnHTML.replace('glyphicon glyphicon-chevron-up', 'fa fa-chevron-up');
+                list.options.topLevelItemButtonHTML = list.options.topLevelItemButtonHTML.replace('glyphicon glyphicon-plus', 'fa fa-plus');
             }
 
             // If you need a button to add a new top-level item
