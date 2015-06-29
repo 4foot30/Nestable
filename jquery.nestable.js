@@ -146,7 +146,7 @@
                     } else {
                         list.el.prepend($(list.options.topLevelItemButtonHTML));
                     }
-                    // Align it
+                    list.el.find('[data-action="add-top-level"]').addClass(list.options.topLevelItemButtonLocation);
                     if (list.options.topLevelItemButtonAlignment === 'right') {
                         list.el.find('[data-action="add-top-level"]').addClass('pull-right');
                     }
