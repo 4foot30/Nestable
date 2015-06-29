@@ -77,10 +77,12 @@ body {
         }
     }
     // Highlightong of new items
-    -webkit-transition: background-color 1s ease-in;
-    -moz-transition:    background-color 1s ease-in;
-    -o-transition:      background-color 1s ease-in;
-    transition:         background-color 1s ease-in;
+    .new > & {
+        -webkit-transition: background-color 1s ease-in;
+        -moz-transition:    background-color 1s ease-in;
+        -o-transition:      background-color 1s ease-in;
+        transition:         background-color 1s ease-in;
+    }
     .highlight > & {
         background-color: #DFF0D8;
     }
