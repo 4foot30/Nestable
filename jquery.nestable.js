@@ -131,7 +131,7 @@
                     // Update the button's text
                     list.options.topLevelItemButtonHTML = list.options.topLevelItemButtonHTML.replace('topLevelItemButtonText', list.options.topLevelItemButtonText);
                     // Add the button
-                    if (list.options.topLevelItemButtonHTMLLocation === 'bottom') {
+                    if (list.options.topLevelItemButtonLocation === 'bottom') {
                         list.el.append($(list.options.topLevelItemButtonHTML));
                     } else {
                         list.el.prepend($(list.options.topLevelItemButtonHTML));
@@ -335,7 +335,7 @@
             // Otherwise add a new item at the top of the first list you find
             if(topLevel) {
                 // Top-level item to be added
-                if (list.options.topLevelItemButtonHTMLLocation === 'bottom') {
+                if (list.options.topLevelItemButtonLocation === 'bottom') {
                     list.el.find(this.options.listNodeName).first().append(editableItemHTML);
                     list.setLocalID(list.el.find(this.options.itemNodeName).last());
                 } else {
@@ -569,7 +569,11 @@
                 target   = $(e.target),
                 dragItem = target.closest(this.options.itemNodeName);
 
-            this.placeEl.css('height', dragItem.height());
+            if (dragItem.find(this.options.itemNodeName).length === 0) {
+                this.placeEl.css('height', dragItem.height());
+            } else {
+                this.placeEl.css('height', dragItem.height() - 5);
+            }
 
             mouse.offsetX = e.offsetX !== undefined ? e.offsetX : e.pageX - target.offset().left;
             mouse.offsetY = e.offsetY !== undefined ? e.offsetY : e.pageY - target.offset().top;
