@@ -5,6 +5,16 @@ body {
 .dd {
     max-width: none;
     margin-bottom: 100px;
+
+    // Make it more obvious that a button in a collapsed section is disabled
+    .btn.disabled, .btn[disabled], fieldset[disabled] .btn {
+        opacity: 0.3;
+        cursor: not-allowed;
+    }
+    button.disabled, button[disabled] {
+        cursor: not-allowed;
+    }
+
 }
 
 .dd-dragel > .dd3-item > .dd3-content {
@@ -157,15 +167,6 @@ button[data-action="add"] {
     @media only screen and (max-width: 480px) {
         margin-right: 6px;
     }
-}
-
-// Make it more obvious that a button in a collapsed section is disabled
-.btn.disabled, .btn[disabled], fieldset[disabled] .btn {
-    opacity: 0.3;
-    cursor: not-allowed;
-}
-button.disabled, button[disabled] {
-    cursor: not-allowed;
 }
 
 button[data-action="add-top-level"] {

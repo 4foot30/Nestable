@@ -5,6 +5,16 @@ body {
   max-width: none;
   margin-bottom: 100px;
 }
+.dd .btn.disabled,
+.dd .btn[disabled],
+.dd fieldset[disabled] .btn {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+.dd button.disabled,
+.dd button[disabled] {
+  cursor: not-allowed;
+}
 .dd-dragel > .dd3-item > .dd3-content {
   margin-bottom: 5px;
 }
@@ -173,16 +183,6 @@ button[data-action="remove"] {
   button[data-action="add"] {
     margin-right: 6px;
   }
-}
-.btn.disabled,
-.btn[disabled],
-fieldset[disabled] .btn {
-  opacity: 0.3;
-  cursor: not-allowed;
-}
-button.disabled,
-button[disabled] {
-  cursor: not-allowed;
 }
 button[data-action="add-top-level"] {
   margin: 10px 0px;
