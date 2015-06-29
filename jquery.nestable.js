@@ -32,36 +32,38 @@
         eCancel = hasTouch ? 'touchcancel' : 'mouseup';
 
     var defaults = {
-        listNodeName            : 'ol',
-        itemNodeName            : 'li',
-        rootClass               : 'dd',
-        listClass               : 'dd-list',
-        itemClass               : 'dd-item',
-        dragClass               : 'dd-dragel',
-        handleClass             : 'dd-handle',
-        collapsedClass          : 'dd-collapsed',
-        placeClass              : 'dd-placeholder',
-        noDragClass             : 'dd-nodrag',
-        emptyClass              : 'dd-empty',
-        expandBtnHTML           : '<button data-action="expand" type="button"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></button>',
-        collapseBtnHTML         : '<button data-action="collapse" type="button"><span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></button>',
-        animateToggle           : true,
-        animateToggleDuration   : 200,
-        group                   : 0,
-        maxDepth                : 5,
-        threshold               : 20,
-        editMode                : false,
-        changeHandler           : null,
-        changeEvent             : 'change',
-        deletionTracking        : false,
-        deletionMessage         : 'Are you sure you want to delete this item?',
-        deletionMessageChildren : 'Are you sure you want to delete this item? This will also delete all children of this item.',
-        topLevelItemButton      : false,
-        topLevelItemButtonText  : 'Add a new top-level item',
-        topLevelItemButtonHTML  : '<button type="button" class="btn btn-info pull-right" data-action="add-top-level"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> topLevelItemButtonText</button><div class="clearfix"></div>',
-        persisted               : {
-            newItemCount        : 1,
-            deletedItems        : []
+        listNodeName                : 'ol',
+        itemNodeName                : 'li',
+        rootClass                   : 'dd',
+        listClass                   : 'dd-list',
+        itemClass                   : 'dd-item',
+        dragClass                   : 'dd-dragel',
+        handleClass                 : 'dd-handle',
+        collapsedClass              : 'dd-collapsed',
+        placeClass                  : 'dd-placeholder',
+        noDragClass                 : 'dd-nodrag',
+        emptyClass                  : 'dd-empty',
+        expandBtnHTML               : '<button data-action="expand" type="button"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></button>',
+        collapseBtnHTML             : '<button data-action="collapse" type="button"><span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></button>',
+        animateToggle               : true,
+        animateToggleDuration       : 200,
+        group                       : 0,
+        maxDepth                    : 5,
+        threshold                   : 20,
+        editMode                    : false,
+        changeHandler               : null,
+        changeEvent                 : 'change',
+        deletionTracking            : false,
+        deletionMessage             : 'Are you sure you want to delete this item?',
+        deletionMessageChildren     : 'Are you sure you want to delete this item? This will also delete all children of this item.',
+        topLevelItemButton          : false,
+        topLevelItemButtonText      : 'Add a new top-level item',
+        topLevelItemButtonHTML      : '<button type="button" class="btn btn-info" data-action="add-top-level"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> topLevelItemButtonText</button><div class="clearfix"></div>',
+        topLevelItemButtonLocation  : 'bottom',
+        topLevelItemButtonAlignment : 'right',
+        persisted                   : {
+            newItemCount            : 1,
+            deletedItems            : []
         }
     };
 
@@ -129,7 +131,15 @@
                     // Update the button's text
                     list.options.topLevelItemButtonHTML = list.options.topLevelItemButtonHTML.replace('topLevelItemButtonText', list.options.topLevelItemButtonText);
                     // Add the button
-                    list.el.append($(list.options.topLevelItemButtonHTML));
+                    if (list.options.topLevelItemButtonHTMLLocation === 'bottom') {
+                        list.el.append($(list.options.topLevelItemButtonHTML));
+                    } else {
+                        list.el.prepend($(list.options.topLevelItemButtonHTML));
+                    }
+                    // Align it
+                    if (list.options.topLevelItemButtonAlignment === 'right') {
+                        list.el.find('[data-action="add-top-level"]').addClass('pull-right');
+                    }
                 }
             }
 
@@ -325,8 +335,13 @@
             // Otherwise add a new item at the top of the first list you find
             if(topLevel) {
                 // Top-level item to be added
-                list.el.find(this.options.listNodeName).first().append(editableItemHTML);
-                list.setLocalID(list.el.find(this.options.itemNodeName).last());
+                if (list.options.topLevelItemButtonHTMLLocation === 'bottom') {
+                    list.el.find(this.options.listNodeName).first().append(editableItemHTML);
+                    list.setLocalID(list.el.find(this.options.itemNodeName).last());
+                } else {
+                    list.el.find(this.options.listNodeName).first().prepend(editableItemHTML);
+                    list.setLocalID(list.el.find(this.options.itemNodeName).first());
+                }
             } else if (item.find(this.options.listNodeName).length === 0) {
                 // New list
                 // However, this must respect the maxDepth option

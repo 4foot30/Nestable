@@ -9,11 +9,13 @@
     }
 
     $('.dd').nestable({
-        editMode: true,
-        changeHandler: updateOutput,
-        deletionTracking: true,
-        maxDepth: 3,
-        topLevelItemButton: true
+        editMode:                    true,
+        changeHandler:               updateOutput,
+        deletionTracking:            true,
+        maxDepth:                    3,
+        topLevelItemButton:          true,
+        topLevelItemButtonLocation:  'top',
+        topLevelItemButtonAlignment: 'left'
     }).on('rearrange', updateOutput);
 
 })();
