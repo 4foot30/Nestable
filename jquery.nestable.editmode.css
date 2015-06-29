@@ -24,6 +24,10 @@ body {
   height: 42px;
   padding-right: 1px;
   margin: 0px 0px 5px 0px;
+  -webkit-transition: background-color 1s ease-in;
+  -moz-transition: background-color 1s ease-in;
+  -o-transition: background-color 1s ease-in;
+  transition: background-color 1s ease-in;
 }
 .edit-mode .dd3-content,
 .dd-dragel .dd3-content {
@@ -63,6 +67,9 @@ body {
   .collapsible > .dd3-content {
     padding-left: 65px;
   }
+}
+.highlight > .dd3-content {
+  background-color: #DFF0D8;
 }
 .dd3-handle {
   height: 42px;

@@ -372,6 +372,12 @@
             }
             list.setLocalID(newItem);
 
+            // Add highlight to newest item
+            newItem.addClass('highlight');
+            setTimeout(function() {
+                newItem.removeClass('highlight');
+            }, 1000);
+
             // Give focus to the input field in the new item, if on a large enough screen
             if (window.innerWidth > 768) {
                 newItem.find('input').focus();
