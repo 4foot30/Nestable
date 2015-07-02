@@ -63,7 +63,7 @@
         topLevelItemButtonAlignment : 'right',
         iconLib                     : 'glyphicon',
         persisted                   : {
-            newItemCount            : 1,
+            newItemCount            : 0,
             deletedItems            : []
         }
     };
@@ -124,6 +124,8 @@
                 });
                 // Let the list know that it's in edit mode
                 list.el.addClass('edit-mode');
+                // Count any pre-existing items so that newItemCount starts at the correct value
+                this.options.persisted.newItemCount = $('.' + list.options.itemClass).length;
             }
 
             // If an icon type other than Glyphicon is needed, update the relevant HTML
