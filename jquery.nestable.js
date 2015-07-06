@@ -413,15 +413,18 @@
 
             if (item.find(list.options.listNodeName).length > 0) {
                 // Item has children
-                if (confirm (list.options.deletionMessageChildren)) {
+                if (confirm(list.options.deletionMessageChildren)) {
                     if (list.options.deletionTracking) {
-                        list.trackDeletion(item.parent().find('[data-server-id]'));
+                        console.log(item.find('[data-server-id]'));
+                        console.log(item.find('[data-server-id]').data('server-id'));
+                        list.trackDeletion(item);
+                        list.trackDeletion(item.find('[data-server-id]'));
                     }
                     item.remove();
                 }
             } else {
                 // Item has no children
-                if (confirm (list.options.deletionMessage)) {
+                if (confirm(list.options.deletionMessage)) {
                     if (list.options.deletionTracking) {
                         list.trackDeletion(item.data('server-id'));
                     }
@@ -466,10 +469,10 @@
         trackDeletion: function(e) {
             var list = this;
             if (typeof(e) === 'number') {
-                // Single item was deleted
+                // Single item or parent item
                 list.options.persisted.deletedItems.push(e);
             } else if (typeof(e) === 'object') {
-                // Item with children was deleted
+                // Child items
                 e.each(function() {
                     var objectID = $(this).data('server-id');
                     if (typeof(objectID) !== 'string') {
