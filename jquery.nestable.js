@@ -415,9 +415,9 @@
                 // Item has children
                 if (confirm(list.options.deletionMessageChildren)) {
                     if (list.options.deletionTracking) {
-                        console.log(item.find('[data-server-id]'));
-                        console.log(item.find('[data-server-id]').data('server-id'));
+                        // Track the deletion of the item you clicked
                         list.trackDeletion(item);
+                        // And then track deletion of its children
                         list.trackDeletion(item.find('[data-server-id]'));
                     }
                     item.remove();
