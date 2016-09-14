@@ -1,0 +1,179 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.dd {
+    max-width: none;
+    margin-bottom: 100px;
+
+    // Make it more obvious that a button in a collapsed section is disabled
+    .btn.disabled, .btn[disabled], fieldset[disabled] .btn {
+        opacity: 0.3;
+        cursor: not-allowed;
+    }
+    button.disabled, button[disabled] {
+        cursor: not-allowed;
+    }
+
+}
+
+.dd-dragel > .dd3-item > .dd3-content {
+    margin-bottom: 5px;
+}
+
+.dd-dragel {
+    .dd-handle {
+    -webkit-box-shadow: none;
+            box-shadow: none;
+    }
+    .dd3-content {
+        -webkit-box-shadow: 2px 4px 6px 0 rgba(0,0,0,.1);
+                box-shadow: 2px 4px 6px 0 rgba(0,0,0,.1);
+    }
+}
+
+.dd-list {
+    // Matches the styles applied inline by jQuery's slideToggle function
+    overflow: hidden;
+    width: 100%;
+}
+
+.dd3-content {
+    height: 42px;
+    padding-right: 1px;
+    .edit-mode &, .dd-dragel & {
+        padding-right: 7px;
+    }
+    margin: 0px 0px 5px 0px;
+    .form-group {
+        float: left;
+        min-width: 100%;
+        .edit-mode &, .dd-dragel & {
+            min-width: ~"calc(100% - 75px)";
+        }
+        margin-left: -5px;
+        margin-bottom: 0px;
+        // Without this, Firefox displays the buttons well below the input
+        vertical-align: top;
+    }
+    @media only screen and (max-width: 480px) {
+        height: auto;
+        padding-right: 5px;
+        padding-left: 35px;
+        text-align: right;
+        .form-group {
+            width: 100%;
+            margin: 0px;
+        }
+        .btn-sm {
+            margin-top: 5px;
+            min-width: 50px;
+        }
+    }
+    .collapsible > & {
+        padding-left: 70px;
+        @media only screen and (max-width: 480px) {
+            padding-left: 65px;
+        }
+    }
+    // Highlighting of new items
+    .new > & {
+        -webkit-transition: background-color 1s ease-in;
+        -moz-transition:    background-color 1s ease-in;
+        -o-transition:      background-color 1s ease-in;
+        transition:         background-color 1s ease-in;
+    }
+    .highlight > & {
+        background-color: #DFF0D8;
+    }
+}
+
+.dd3-handle {
+    height: 42px;
+    padding: 0px;
+    cursor: move;
+    &:before {
+        display: none;
+    }
+    @media only screen and (max-width: 480px) {
+        .edit-mode &, .dd-dragel & {
+            height: 76px;
+        }
+    }
+    .glyphicon, .fa {
+        position: absolute;
+        color: #fff;
+        text-indent: 0%;
+        font-size: 22px;
+        top: 8px;
+        left: 3px;
+        @media only screen and (max-width: 480px) {
+            top: 50%;
+            margin-top: -11px;
+        }
+    }
+}
+
+.dd-placeholder {
+    margin: 0px 0px 5px;
+}
+
+button[data-action="collapse"], button[data-action="expand"] {
+    text-indent: 0;
+    width: 30px;
+    height: 42px;
+    background: #d5d5d5;
+    border: 1px solid #ccc;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    margin: 0;
+    left: 30px;
+    &:before {
+        content: '';
+    }
+    &:hover, &:focus {
+        background: #404040;
+        border: 1px solid #404040;
+    }
+    &:focus {
+        outline: none;
+    }
+    &.disabled, &[disabled] {
+        &:hover, &:focus {
+            background: #d5d5d5;
+            border: 1px solid #ccc;
+        }
+    }
+    @media only screen and (max-width: 480px) {
+        .edit-mode &, .dd-dragel & {
+            height: 76px;
+        }
+    }
+}
+
+button[data-action="add"], button[data-action="remove"] {
+    float: left;
+    margin-left: 6px;
+    // Hide, unless in edit mode or dragging
+    display: none;
+    .edit-mode &, .dd-dragel & {
+        display: block;
+    }
+    @media only screen and (max-width: 480px) {
+        margin-left: 0px;
+    }
+}
+
+button[data-action="add"] {
+    @media only screen and (max-width: 480px) {
+        margin-right: 6px;
+    }
+}
+
+button[data-action="add-top-level"] {
+    margin: 5px 0px 10px;
+    &.top {
+        margin: 0px 0px 10px;
+    }
+}

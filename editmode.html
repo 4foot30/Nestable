@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html lang="en" class="lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>    <html lang="en" class="lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>    <html lang="en" class="lt-ie9"> <![endif]-->
+<!--[if IE 9]>    <html lang="en" class="ie9"> <![endif]-->
+<!--[if gt IE 9]><!--> <html lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+        <title>Nestable - edit mode</title>
+        <!-- Fonts -->
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+        <!-- Bootstrap - latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <!-- Nestable -->
+        <link href="jquery.nestable.css" rel="stylesheet">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        <!-- Test CSS -->
+        <link href="jquery.nestable.editmode.css" rel="stylesheet">
+    </head>
+
+    <body>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h1>Edit mode</h1>
+                    <p>jquery.nestable.css and jquery.nestable.js are now taken from <a href="http://bucketadmin.themebucket.net/nestable.html">Bucket Admin Bootstrap theme</a>, because this Edit Mode was originally created to work under that theme.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-10 col-md-9 col-lg-8">
+                    <section class="panel">
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <textarea class="form-control" id="json"></textarea>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+
+                    <div class="dd">
+                        <ol class="dd-list" style="display:block;">
+                            <li class="dd-item dd3-item" data-sort-id="1" data-server-id="1">
+                                <div class="dd-handle dd3-handle">
+                                    <span class="fa fa-arrows" aria-hidden="true"></span>
+                                </div>
+                                <div class="dd3-content">
+                                    <div class="form-group">
+                                        <input class="form-control input-sm" type="text" placeholder="Enter title">
+                                    </div>
+                                    <button type="button" class="btn btn-sm btn-info" data-action="add"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                                    <button type="button" class="btn btn-sm btn-danger" data-action="remove"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- jQuery -->
+        <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+
+        <!-- Bootstrap - latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <!-- Nestable -->
+        <script src="jquery.nestable.js"></script>
+
+        <!-- Test functions -->
+        <script src="editmode.js"></script>
+
+    </body>
+
+</html>

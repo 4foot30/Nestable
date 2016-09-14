@@ -1,0 +1,194 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+.dd {
+  max-width: none;
+  margin-bottom: 100px;
+}
+.dd .btn.disabled,
+.dd .btn[disabled],
+.dd fieldset[disabled] .btn {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+.dd button.disabled,
+.dd button[disabled] {
+  cursor: not-allowed;
+}
+.dd-dragel > .dd3-item > .dd3-content {
+  margin-bottom: 5px;
+}
+.dd-dragel .dd-handle {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.dd-dragel .dd3-content {
+  -webkit-box-shadow: 2px 4px 6px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 2px 4px 6px 0 rgba(0, 0, 0, 0.1);
+}
+.dd-list {
+  overflow: hidden;
+  width: 100%;
+}
+.dd3-content {
+  height: 42px;
+  padding-right: 1px;
+  margin: 0px 0px 5px 0px;
+}
+.edit-mode .dd3-content,
+.dd-dragel .dd3-content {
+  padding-right: 7px;
+}
+.dd3-content .form-group {
+  float: left;
+  min-width: 100%;
+  margin-left: -5px;
+  margin-bottom: 0px;
+  vertical-align: top;
+}
+.edit-mode .dd3-content .form-group,
+.dd-dragel .dd3-content .form-group {
+  min-width: calc(100% - 75px);
+}
+@media only screen and (max-width: 480px) {
+  .dd3-content {
+    height: auto;
+    padding-right: 5px;
+    padding-left: 35px;
+    text-align: right;
+  }
+  .dd3-content .form-group {
+    width: 100%;
+    margin: 0px;
+  }
+  .dd3-content .btn-sm {
+    margin-top: 5px;
+    min-width: 50px;
+  }
+}
+.collapsible > .dd3-content {
+  padding-left: 70px;
+}
+@media only screen and (max-width: 480px) {
+  .collapsible > .dd3-content {
+    padding-left: 65px;
+  }
+}
+.new > .dd3-content {
+  -webkit-transition: background-color 1s ease-in;
+  -moz-transition: background-color 1s ease-in;
+  -o-transition: background-color 1s ease-in;
+  transition: background-color 1s ease-in;
+}
+.highlight > .dd3-content {
+  background-color: #DFF0D8;
+}
+.dd3-handle {
+  height: 42px;
+  padding: 0px;
+  cursor: move;
+}
+.dd3-handle:before {
+  display: none;
+}
+@media only screen and (max-width: 480px) {
+  .edit-mode .dd3-handle,
+  .dd-dragel .dd3-handle {
+    height: 76px;
+  }
+}
+.dd3-handle .glyphicon,
+.dd3-handle .fa {
+  position: absolute;
+  color: #fff;
+  text-indent: 0%;
+  font-size: 22px;
+  top: 8px;
+  left: 3px;
+}
+@media only screen and (max-width: 480px) {
+  .dd3-handle .glyphicon,
+  .dd3-handle .fa {
+    top: 50%;
+    margin-top: -11px;
+  }
+}
+.dd-placeholder {
+  margin: 0px 0px 5px;
+}
+button[data-action="collapse"],
+button[data-action="expand"] {
+  text-indent: 0;
+  width: 30px;
+  height: 42px;
+  background: #d5d5d5;
+  border: 1px solid #ccc;
+  color: #fff;
+  position: absolute;
+  top: 0;
+  margin: 0;
+  left: 30px;
+}
+button[data-action="collapse"]:before,
+button[data-action="expand"]:before {
+  content: '';
+}
+button[data-action="collapse"]:hover,
+button[data-action="expand"]:hover,
+button[data-action="collapse"]:focus,
+button[data-action="expand"]:focus {
+  background: #404040;
+  border: 1px solid #404040;
+}
+button[data-action="collapse"]:focus,
+button[data-action="expand"]:focus {
+  outline: none;
+}
+button[data-action="collapse"].disabled:hover,
+button[data-action="expand"].disabled:hover,
+button[data-action="collapse"][disabled]:hover,
+button[data-action="expand"][disabled]:hover,
+button[data-action="collapse"].disabled:focus,
+button[data-action="expand"].disabled:focus,
+button[data-action="collapse"][disabled]:focus,
+button[data-action="expand"][disabled]:focus {
+  background: #d5d5d5;
+  border: 1px solid #ccc;
+}
+@media only screen and (max-width: 480px) {
+  .edit-mode button[data-action="collapse"],
+  .edit-mode button[data-action="expand"],
+  .dd-dragel button[data-action="collapse"],
+  .dd-dragel button[data-action="expand"] {
+    height: 76px;
+  }
+}
+button[data-action="add"],
+button[data-action="remove"] {
+  float: left;
+  margin-left: 6px;
+  display: none;
+}
+.edit-mode button[data-action="add"],
+.edit-mode button[data-action="remove"],
+.dd-dragel button[data-action="add"],
+.dd-dragel button[data-action="remove"] {
+  display: block;
+}
+@media only screen and (max-width: 480px) {
+  button[data-action="add"],
+  button[data-action="remove"] {
+    margin-left: 0px;
+  }
+}
+@media only screen and (max-width: 480px) {
+  button[data-action="add"] {
+    margin-right: 6px;
+  }
+}
+button[data-action="add-top-level"] {
+  margin: 5px 0px 10px;
+}
+button[data-action="add-top-level"].top {
+  margin: 0px 0px 10px;
+}
